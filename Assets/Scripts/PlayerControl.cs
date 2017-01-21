@@ -70,8 +70,8 @@ public class PlayerControl : NetworkBehaviour
 		_rigid.AddForce(new Vector2(runPower * direction, 0));
 
 		//Clamp horizontal velocity
-		_rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
-		_rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
+		_rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(maxRunSpeed, _rigid.velocity.y) : _rigid.velocity;
+		_rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-maxRunSpeed, _rigid.velocity.y) : _rigid.velocity;
 
 		//Jumping
 		if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
