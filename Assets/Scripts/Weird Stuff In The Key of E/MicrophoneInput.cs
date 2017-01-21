@@ -27,6 +27,12 @@ public class MicrophoneInput : MonoBehaviour {
     AudioSource aud;
     void Start()
     {
+        foreach (string device in Microphone.devices)
+        {
+            Debug.Log("Name: " + device);
+        }
+
+
         aud = GetComponent<AudioSource>();
         aud.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
         aud.mute = true;
