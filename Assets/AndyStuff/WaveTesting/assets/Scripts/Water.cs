@@ -36,10 +36,11 @@ public class Water : MonoBehaviour {
     float baseheight;
     float left;
     float bottom;
-    
 
+    BoxCollider2D box;
     void Start()
     {
+        
         //Spawning our water
         SpawnWater(-10,20,0,-3);
     }
@@ -174,9 +175,9 @@ public class Water : MonoBehaviour {
 
         }
 
-        
-        
-        
+
+        box = GetComponent<BoxCollider2D>();
+
     }
 
     //Same as the code from in the meshes before, set the new mesh positions
@@ -245,6 +246,18 @@ public class Water : MonoBehaviour {
 
     void OnTriggerStay2D(Collider2D Hit)
     {
+        if (Hit.gameObject.GetComponent<FloatingObject>())
+        {
+            FloatingObject k = Hit.gameObject.GetComponent<FloatingObject>();
+            Rigidbody2D rbd2d = Hit.GetComponent<Rigidbody2D>();
+            foreach (Transform m in k.boyancyTargets)
+            {
+                if (box.OverlapPoint(m.position))
+                {
+                    rbd2d.AddForceAtPosition(Vector2.up * k.boyancy, m.position, ForceMode2D.Force);
+                }
+            }
+        }
         //Bonus exercise. Fill in your code here for making things float in your water.
         //You might want to even include a buoyancy constant unique to each object!
     }
