@@ -87,7 +87,7 @@ public class Water : MonoBehaviour
 
         // FOR TESTING!!!
         // REMEMBER TO DELETE!!!
-        MoveBackward(10);
+        //MoveBackward(10);
         //MoveForward(10);
     }
 
@@ -187,6 +187,7 @@ public class Water : MonoBehaviour
             colliders[i].GetComponent<BoxCollider2D>().isTrigger = true;
             colliders[i].AddComponent<WaterDetector>();
 
+            box = transform.GetComponent<BoxCollider2D>();
         }
         
     }
@@ -266,6 +267,7 @@ public class Water : MonoBehaviour
 			{
 				if (box.OverlapPoint(m.position))
 				{
+                    Debug.Log("AARRRR");
 					rbd2d.AddForceAtPosition(Vector2.up * k.boyancy, m.position, ForceMode2D.Force);
 				}
 			}
@@ -374,6 +376,7 @@ public class Water : MonoBehaviour
     }
 
     // Remove verticies from the right end of the water and add them to the left.
+
     void MoveBackward(int vertices)
     {
         // Need this later
@@ -472,6 +475,7 @@ public class Water : MonoBehaviour
         }
         */
     }
+
 
 
 }
