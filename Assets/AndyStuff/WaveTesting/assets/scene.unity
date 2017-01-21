@@ -425,6 +425,54 @@ Transform:
   m_Father: {fileID: 559493069}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1180849599
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967050620692654, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114302530943312256, guid: 17e2ba145e40c084f85f93ac792f6651,
+        type: 2}
+      propertyPath: m_PlayerPrefab
+      value: 
+      objectReference: {fileID: 1284156920494448, guid: 93e8775231e254d4a89d0ef4257b970b,
+        type: 2}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1507498685
 GameObject:
   m_ObjectHideFlags: 0
