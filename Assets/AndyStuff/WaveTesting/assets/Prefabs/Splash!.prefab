@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 15.078864, y: -2.0835204, z: 3.7734375}
+  m_LocalPosition: {x: -3.710656, y: 4.5407696, z: 3.7734375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,15 +82,19 @@ ParticleSystem:
       m_PostInfinity: 2
       m_RotationOrder: 4
     minMaxState: 0
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 0
+  randomSeed: 1742555650
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.9386482
+<<<<<<< HEAD
+      scalar: 0.93953544
+=======
+      scalar: 0.9618706
+>>>>>>> adae6f6da1ac90723d2d815f74564fa4ca89997d
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -129,7 +133,11 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 9.702982
+<<<<<<< HEAD
+      scalar: 9.738161
+=======
+      scalar: 10.34951
+>>>>>>> adae6f6da1ac90723d2d815f74564fa4ca89997d
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -160,10 +168,10 @@ ParticleSystem:
       maxGradient:
         key0:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4283426716
         key1:
           serializedVersion: 2
-          rgba: 4294967295
+          rgba: 4292132763
         key2:
           serializedVersion: 2
           rgba: 0
@@ -246,10 +254,10 @@ ParticleSystem:
         m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
-      minMaxState: 0
+      maxColor: {r: 0.47843137, g: 1, b: 1, a: 0.62352943}
+      minMaxState: 4
     startSize:
-      scalar: 0.3
+      scalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -483,7 +491,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     randomizeRotationDirection: 0
-    maxNumParticles: 1000
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -883,7 +891,7 @@ ParticleSystem:
       minMaxState: 0
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       maxGradient:
@@ -895,7 +903,7 @@ ParticleSystem:
           rgba: 4294967295
         key2:
           serializedVersion: 2
-          rgba: 0
+          rgba: 16777215
         key3:
           serializedVersion: 2
           rgba: 0
@@ -913,7 +921,7 @@ ParticleSystem:
           rgba: 0
         ctime0: 0
         ctime1: 65535
-        ctime2: 0
+        ctime2: 65535
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -2681,7 +2689,7 @@ ParticleSystemRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

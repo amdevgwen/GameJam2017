@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ScannerEffect
+  m_Shader: {fileID: 4800000, guid: 2753a9bb72ffb1d42820bd03a83441c2, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+    - first:
+        name: _DetailTex
+      second:
+        m_Texture: {fileID: 2800000, guid: ea5873cfd9158664f89459f0c9e1d853, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EchoTex
+      second:
+        m_Texture: {fileID: 2800000, guid: d8c32d1af95e4774f9b71e31f299a21b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - first:
+        name: _HBarVisibility
+      second: 0.2
+    - first:
+        name: _LeadSharp
+      second: 25
+    - first:
+        name: _ScanDistance
+      second: 0
+    - first:
+        name: _ScanWidth
+      second: 32.29
+    - first:
+        name: _Width
+      second: 16
+    m_Colors:
+    - first:
+        name: _HBarColor
+      second: {r: 1, g: 0.549858, b: 0.14117646, a: 1}
+    - first:
+        name: _LeadColor
+      second: {r: 0.88235295, g: 0.54498273, b: 0.03892732, a: 0}
+    - first:
+        name: _MidColor
+      second: {r: 0.8784314, g: 0.02745098, b: 0.02745098, a: 1}
+    - first:
+        name: _TrailColor
+      second: {r: 1, g: 0.5586207, b: 0, a: 1}
