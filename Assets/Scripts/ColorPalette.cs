@@ -15,7 +15,7 @@ public class ColorPalette : MonoBehaviour
 	 * 2s are the base colors.
 	 * 3s are bright!
 	 * 4s are pale (great for text). */
-	public Color blue0, blue1, blue2, blue3, blue4, yellow0, yellow1, yellow2, yellow3, yellow4, red0, red1, red2, red3, red4, blk, gry1, gry2, gry3, wht;
+	public Color primary0, primary1, primary2, primary3, primary4, green0, green1, green2, green3, green4, blue0, blue1, blue2, blue3, blue4, complementary0, complementary1, complementary2, complementary3, complementary4;
 
 	public static string ColorToHex(Color32 color)
 	{

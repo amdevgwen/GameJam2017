@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerControl : NetworkBehaviour
 {
-	public float runSpeed;
+	public float runPower;
+	public float maxRunSpeed;
 	public float jumpPower;
 	public bool isGrounded;
 
@@ -25,39 +26,81 @@ public class PlayerControl : NetworkBehaviour
 		if (!isLocalPlayer)
 			return;
 
+		//Ground anim
 		_anim.SetBool("On Ground", isGrounded);
 
+		float direction = 0;
+
+		//Movement
 		if (Input.GetKey(KeyCode.RightArrow))
 		{
+			//Right facing
 			if (transform.localScale.x > 0f)
 				transform.localScale = new Vector3(-1, 1, 1);
 
+			//Moving
 			_anim.SetBool("Running", true);
 
-			_rigid.AddForce(new Vector2(runSpeed, 0));
+			//Dir
+			direction = 1;
 		}
 		else if (Input.GetKey(KeyCode.LeftArrow))
 		{
+			//Left facing
 			if (transform.localScale.x < 0f)
 				transform.localScale = new Vector3(1, 1, 1);
-		
+
+			//Moving
 			_anim.SetBool("Running", true);
-		
-			_rigid.AddForce(new Vector2(-runSpeed, 0));
+
+			//Dir
+			direction = -1;
 		}
 		else
 		{
+			//Not moving
 			_anim.SetBool("Running", false);
 		}
 
-		_rigid.velocity = _rigid.velocity.x > 10 ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
-		_rigid.velocity = _rigid.velocity.x < -10 ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
+		//Dampen air movement
+		if (!isGrounded)
+			direction /= 2;
 
+		//Movement
+		_rigid.AddForce(new Vector2(runPower * direction, 0));
+
+		//Clamp horizontal velocity
+		_rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
+		_rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
+
+		//Jumping
 		if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
 		{
 			_rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
 
 			_anim.SetTrigger("Jump");
+		}
+	}
+
+	void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.tag == "Water")
+		{
+			_rigid.gravityScale = 0.1f;
+			if (Mathf.Abs(_rigid.velocity.y) > 1)
+				_rigid.velocity /= 10;
+
+			_anim.SetBool("In Water", true);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.tag == "Water")
+		{
+			_rigid.gravityScale = 2f;
+
+			_anim.SetBool("In Water", false);
 		}
 	}
 }
