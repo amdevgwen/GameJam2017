@@ -81,4 +81,26 @@ public class PlayerControl : NetworkBehaviour
 			_anim.SetTrigger("Jump");
 		}
 	}
+
+	void OnTriggerStay2D(Collider2D other)
+	{
+		if (other.tag == "Water")
+		{
+			_rigid.gravityScale = 0.1f;
+			if (Mathf.Abs(_rigid.velocity.y) > 1)
+				_rigid.velocity /= 10;
+
+			_anim.SetBool("In Water", true);
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.tag == "Water")
+		{
+			_rigid.gravityScale = 2f;
+
+			_anim.SetBool("In Water", false);
+		}
+	}
 }
