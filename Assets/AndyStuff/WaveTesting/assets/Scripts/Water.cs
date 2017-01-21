@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Water : MonoBehaviour {
 
@@ -7,15 +8,15 @@ public class Water : MonoBehaviour {
     LineRenderer Body;
 
     //Our physics arrays
-    float[] xpositions;
-    float[] ypositions;
-    float[] velocities;
-    float[] accelerations;
+    List<float> xpositions = new List<float>();
+    List<float> ypositions = new List<float>();
+    List<float> velocities = new List<float>();
+    List<float> accelerations = new List<float>();
 
     //Our meshes and colliders
-    GameObject[] meshobjects;
-    GameObject[] colliders;
-    Mesh[] meshes;
+    List<GameObject> meshobjects = new List<GameObject>();
+    List<GameObject> colliders = new List<GameObject>();
+    List<Mesh> meshes = new List<Mesh>();
 
     //Our particle system
     public GameObject splash;
@@ -36,6 +37,8 @@ public class Water : MonoBehaviour {
     float baseheight;
     float left;
     float bottom;
+    float width;
+
     
 
     void Start()
@@ -48,13 +51,13 @@ public class Water : MonoBehaviour {
     public void Splash(float xpos, float velocity)
     {
         //If the position is within the bounds of the water:
-        if (xpos >= xpositions[0] && xpos <= xpositions[xpositions.Length-1])
+        if (xpos >= xpositions[0] && xpos <= xpositions[xpositions.Count-1])
         {
             //Offset the x position to be the distance from the left side
             xpos -= xpositions[0];
 
             //Find which spring we're touching
-            int index = Mathf.RoundToInt((xpositions.Length-1)*(xpos / (xpositions[xpositions.Length-1] - xpositions[0])));
+            int index = Mathf.RoundToInt((xpositions.Count-1)*(xpos / (xpositions[xpositions.Count-1] - xpositions[0])));
 
             //Add the velocity of the falling object to the spring
             velocities[index] += velocity * 2f;
@@ -71,16 +74,19 @@ public class Water : MonoBehaviour {
             Vector3 position = new Vector3(xpositions[index],ypositions[index]-0.35f,5);
 
             //This line aims the splash towards the middle. Only use for small bodies of water:
-            Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Length / 2)], baseheight + 8, 5) - position);
+            Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Count / 2)], baseheight + 8, 5) - position);
             
             //Create the splash and tell it to destroy itself.
             GameObject splish = Instantiate(splash,position,rotation) as GameObject;
             Destroy(splish, lifetime+0.3f);
         }
+
     }
 
     public void SpawnWater(float Left, float Width, float Top, float Bottom)
     {
+
+
         //Bonus exercise: Add a box collider to the water that will allow things to float in it.
         gameObject.AddComponent<BoxCollider2D>();
         gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(Left + Width / 2, (Top + Bottom) / 2);
@@ -100,36 +106,37 @@ public class Water : MonoBehaviour {
         Body.SetWidth(0.1f, 0.1f);
 
         //Declare our physics arrays
-        xpositions = new float[nodecount];
-        ypositions = new float[nodecount];
-        velocities = new float[nodecount];
-        accelerations = new float[nodecount];
+        //xpositions = new List<float>(nodecount);
+        //ypositions = new List<float>(nodecount);
+        //velocities = new List<float>(nodecount);
+        //accelerations = new List<float>(nodecount);
         
         //Declare our mesh arrays
-        meshobjects = new GameObject[edgecount];
-        meshes = new Mesh[edgecount];
-        colliders = new GameObject[edgecount];
+        //meshobjects = new List<GameObject>(edgecount);
+        //meshes = new List<Mesh>(edgecount);
+        //colliders = new List<GameObject>(edgecount);
 
         //Set our variables
         baseheight = Top;
         bottom = Bottom;
         left = Left;
+        width = Width;
 
         //For each node, set the line renderer and our physics arrays
         for (int i = 0; i < nodecount; i++)
         {
-            ypositions[i] = Top;
-            xpositions[i] = Left + Width * i / edgecount;
+            ypositions.Add(Top);
+            xpositions.Add(Left + Width * i / edgecount);
             Body.SetPosition(i, new Vector3(xpositions[i], Top, z));
-            accelerations[i] = 0;
-            velocities[i] = 0;
+            accelerations.Add(0);
+            velocities.Add(0);
         }
 
         //Setting the meshes now:
         for (int i = 0; i < edgecount; i++)
         {
             //Make the mesh
-            meshes[i] = new Mesh();
+            meshes.Add(new Mesh());
 
             //Create the corners of the mesh
             Vector3[] Vertices = new Vector3[4];
@@ -154,12 +161,12 @@ public class Water : MonoBehaviour {
             meshes[i].triangles = tris;
 
             //Create a holder for the mesh, set it to be the manager's child
-            meshobjects[i] = Instantiate(watermesh,Vector3.zero,Quaternion.identity) as GameObject;
+            meshobjects.Add(Instantiate(watermesh,Vector3.zero,Quaternion.identity) as GameObject);
             meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
             meshobjects[i].transform.parent = transform;
 
             //Create our colliders, set them be our child
-            colliders[i] = new GameObject();
+            colliders.Add(new GameObject());
             colliders[i].name = "Trigger";
             colliders[i].AddComponent<BoxCollider2D>();
             colliders[i].transform.parent = transform;
@@ -182,7 +189,7 @@ public class Water : MonoBehaviour {
     //Same as the code from in the meshes before, set the new mesh positions
     void UpdateMeshes()
     {
-        for (int i = 0; i < meshes.Length; i++)
+        for (int i = 0; i < meshes.Count; i++)
         {
 
             Vector3[] Vertices = new Vector3[4];
@@ -199,7 +206,7 @@ public class Water : MonoBehaviour {
     void FixedUpdate()
     {
         //Here we use the Euler method to handle all the physics of our springs:
-        for (int i = 0; i < xpositions.Length ; i++)
+        for (int i = 0; i < xpositions.Count ; i++)
         {
             float force = springconstant * (ypositions[i] - baseheight) + velocities[i]*damping ;
             accelerations[i] = -force;
@@ -209,13 +216,13 @@ public class Water : MonoBehaviour {
         }
 
         //Now we store the difference in heights:
-        float[] leftDeltas = new float[xpositions.Length];
-        float[] rightDeltas = new float[xpositions.Length];
+        float[] leftDeltas = new float[xpositions.Count];
+        float[] rightDeltas = new float[xpositions.Count];
 
         //We make 8 small passes for fluidity:
         for (int j = 0; j < 8; j++)
         {
-            for (int i = 0; i < xpositions.Length; i++)
+            for (int i = 0; i < xpositions.Count; i++)
             {
                 //We check the heights of the nearby nodes, adjust velocities accordingly, record the height differences
                 if (i > 0)
@@ -223,7 +230,7 @@ public class Water : MonoBehaviour {
                     leftDeltas[i] = spread * (ypositions[i] - ypositions[i-1]);
                     velocities[i - 1] += leftDeltas[i];
                 }
-                if (i < xpositions.Length - 1)
+                if (i < xpositions.Count - 1)
                 {
                     rightDeltas[i] = spread * (ypositions[i] - ypositions[i + 1]);
                     velocities[i + 1] += rightDeltas[i];
@@ -231,11 +238,11 @@ public class Water : MonoBehaviour {
             }
 
             //Now we apply a difference in position
-            for (int i = 0; i < xpositions.Length; i++)
+            for (int i = 0; i < xpositions.Count; i++)
             {
                 if (i > 0)
                     ypositions[i-1] += leftDeltas[i];
-                if (i < xpositions.Length - 1)
+                if (i < xpositions.Count - 1)
                     ypositions[i + 1] += rightDeltas[i];
             }
         }
@@ -249,5 +256,102 @@ public class Water : MonoBehaviour {
         //You might want to even include a buoyancy constant unique to each object!
     }
 
+
+    // Remove verticies from the left end of the water and add them to the right.
+    void MoveForward(int vertices)
+    {
+        // Have to destroy stuff first before removing them from the lists
+        for (int i = 0; i < vertices; i++)
+        {
+            Destroy(meshobjects[i]);
+            Destroy(colliders[i]);
+            Destroy(meshes[i]);
+        }
+
+        // Clear out old values on the left
+        meshobjects.RemoveRange(0, vertices);
+        colliders.RemoveRange(0, vertices);
+        meshes.RemoveRange(0, vertices);
+
+        xpositions.RemoveRange(0, vertices);
+        ypositions.RemoveRange(0, vertices);
+        velocities.RemoveRange(0, vertices);
+        accelerations.RemoveRange(0, vertices);
+
+        // This is a thing that needs to happen for some reason.
+        int edgecount = Mathf.RoundToInt(width) * 5;
+
+        // Since there's 5 meshes per one unity "unit", according to the previous line, add .2 to left for each mesh removed.
+        // Hopefully this works.
+        left += 0.2f * vertices;
+
+        // Doing this seprately because reasons
+        for (int i = 0; i < vertices; i++)
+        {
+            ypositions.Add(baseheight);
+            xpositions.Add(left + width * xpositions.Count / edgecount);
+            Body.SetPosition(i, new Vector3(xpositions[i], baseheight, z));
+            accelerations.Add(0);
+            velocities.Add(0);
+        }
+
+        
+
+        // Add new values to the right, hopefully.
+        for (int i = 0; i < vertices; i++)
+        {
+            //Make the mesh
+            meshes.Add(new Mesh());
+
+            int index = meshes.Count - 1;
+
+            //Create the corners of the mesh
+            Vector3[] Vertices = new Vector3[4];
+            Vertices[0] = new Vector3(xpositions[index], ypositions[index], z);
+            Vertices[1] = new Vector3(xpositions[index + 1], ypositions[index + 1], z);
+            Vertices[2] = new Vector3(xpositions[index], bottom, z);
+            Vertices[3] = new Vector3(xpositions[index + 1], bottom, z);
+
+            //Set the UVs of the texture
+            Vector2[] UVs = new Vector2[4];
+            UVs[0] = new Vector2(0, 1);
+            UVs[1] = new Vector2(1, 1);
+            UVs[2] = new Vector2(0, 0);
+            UVs[3] = new Vector2(1, 0);
+
+            //Set where the triangles should be.
+            int[] tris = new int[6] { 0, 1, 3, 3, 2, 0 };
+
+            //Add all this data to the mesh.
+            meshes[index].vertices = Vertices;
+            meshes[index].uv = UVs;
+            meshes[index].triangles = tris;
+
+            //Create a holder for the mesh, set it to be the manager's child
+            meshobjects.Add(Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject);
+
+            //index = meshobjects.Count - 1; // should be the same as the previous index, but better safe than sorry.
+
+            meshobjects[index].GetComponent<MeshFilter>().mesh = meshes[index];
+            meshobjects[index].transform.parent = transform;
+
+            //Create our colliders, set them be our child
+            colliders.Add(new GameObject());
+
+            //index = colliders.Count - 1; // should be the same as the previous index, but better safe than sorry.
+
+            colliders[index].name = "Trigger";
+            colliders[index].AddComponent<BoxCollider2D>();
+            colliders[index].transform.parent = transform;
+
+            //Set the position and scale to the correct dimensions
+            colliders[index].transform.position = new Vector3(left + width * (index + 0.5f) / edgecount, baseheight - 0.5f, 0);
+            colliders[index].transform.localScale = new Vector3(width / edgecount, 1, 1);
+
+            //Add a WaterDetector and make sure they're triggers
+            colliders[index].GetComponent<BoxCollider2D>().isTrigger = true;
+            colliders[index].AddComponent<WaterDetector>();
+        }
+    }
 
 }
