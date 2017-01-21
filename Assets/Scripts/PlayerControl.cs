@@ -32,7 +32,9 @@ public class PlayerControl : NetworkBehaviour
     // the Update loop contains a very simple example of moving the character around and controlling the animation
     void Update()
     {
-        
+        //do not update if not local
+        if (!isLocalPlayer) return;
+
         if (_controller.isGrounded)
             _velocity.y = 0;
 
