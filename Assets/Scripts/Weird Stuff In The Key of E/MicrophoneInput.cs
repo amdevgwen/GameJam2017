@@ -35,11 +35,19 @@ public class MicrophoneInput : MonoBehaviour {
 
         aud = GetComponent<AudioSource>();
         aud.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
-        aud.mute = true;
         aud.Play();
-        aud.mute = true;
-
+        StartCoroutine(MicrophoneInterval());
         while (!(Microphone.GetPosition(Microphone.devices[0]) > 0)) { }
+    }
+
+    public float miketime = 0.2f;
+    public IEnumerator MicrophoneInterval()
+    {
+        aud = GetComponent<AudioSource>();
+        aud.clip = Microphone.Start(Microphone.devices[0], true, 10, 44100);
+        aud.Play();
+        yield return new WaitForSecondsRealtime(0.2f);
+        StartCoroutine(MicrophoneInterval());
     }
 
     bool loudEnough;
