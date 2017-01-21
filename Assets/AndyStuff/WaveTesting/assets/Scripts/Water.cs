@@ -138,7 +138,7 @@ public class Water : MonoBehaviour {
             Vertices[1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
             Vertices[2] = new Vector3(xpositions[i], bottom, z);
             Vertices[3] = new Vector3(xpositions[i+1], bottom, z);
-
+            
             //Set the UVs of the texture
             Vector2[] UVs = new Vector2[4];
             UVs[0] = new Vector2(0, 1);
@@ -158,12 +158,15 @@ public class Water : MonoBehaviour {
             meshobjects[i] = Instantiate(watermesh,Vector3.zero,Quaternion.identity) as GameObject;
             meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
             meshobjects[i].transform.parent = transform;
+            meshobjects[i].gameObject.layer = transform.gameObject.layer;
 
             //Create our colliders, set them be our child
             colliders[i] = new GameObject();
             colliders[i].name = "Trigger";
             colliders[i].AddComponent<BoxCollider2D>();
             colliders[i].transform.parent = transform;
+
+            colliders[i].gameObject.layer = transform.gameObject.layer;
 
             //Set the position and scale to the correct dimensions
             colliders[i].transform.position = new Vector3(Left + Width * (i + 0.5f) / edgecount, Top - 0.5f, 0);
