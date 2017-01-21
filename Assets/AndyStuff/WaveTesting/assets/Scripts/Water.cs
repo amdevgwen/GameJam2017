@@ -87,7 +87,8 @@ public class Water : MonoBehaviour
 
         // FOR TESTING!!!
         // REMEMBER TO DELETE!!!
-      //  MoveBackward(10);
+        MoveBackward(10);
+        //MoveForward(10);
     }
 
     public void SpawnWater(float Left, float Width, float Top, float Bottom)
@@ -375,6 +376,9 @@ public class Water : MonoBehaviour
     // Remove verticies from the right end of the water and add them to the left.
     void MoveBackward(int vertices)
     {
+        // Need this later
+        int xLength = xpositions.Count;
+
         // Have to destroy stuff first before removing them from the lists
         for (int i = vertices; i > 0; i--)
         {
@@ -400,12 +404,12 @@ public class Water : MonoBehaviour
         // Hopefully this works.
         left -= 0.2f * vertices;
         
-        
+        /*
         // Doing this seprately because reasons
         for (int i = 0; i < vertices; i++)
         {
             ypositions.Insert(i, baseheight);
-            xpositions.Insert(i, left + width * xpositions.Count / edgecount);
+            xpositions.Insert(i, left + width * xLength / edgecount);
             Body.SetPosition(i, new Vector3(xpositions[i], baseheight, z));
             accelerations.Insert(i, 0);
             velocities.Insert(i, 0);
@@ -413,7 +417,7 @@ public class Water : MonoBehaviour
 
 
 
-        // Add new values to the right, hopefully.
+        // Add new values to the left, hopefully.
         for (int i = 0; i < vertices; i++)
         {
             //Make the mesh
@@ -466,7 +470,7 @@ public class Water : MonoBehaviour
             colliders[i].GetComponent<BoxCollider2D>().isTrigger = true;
             colliders[i].AddComponent<WaterDetector>();
         }
-        
+        */
     }
 
 
