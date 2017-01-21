@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runSpeed: 20
-  jumpPower: 12
+  jumpPower: 5
   isGrounded: 0
 --- !u!212 &212979142807606592
 SpriteRenderer:
