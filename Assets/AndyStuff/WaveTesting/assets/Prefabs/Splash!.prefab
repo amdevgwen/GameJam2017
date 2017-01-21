@@ -90,7 +90,7 @@ ParticleSystem:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 0.95086205
+      scalar: 0.9500583
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -129,7 +129,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     startSpeed:
-      scalar: 10.091841
+      scalar: 10.070601
       maxCurve:
         serializedVersion: 2
         m_Curve:
