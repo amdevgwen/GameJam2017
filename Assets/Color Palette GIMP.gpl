@@ -1,24 +1,24 @@
 GIMP Palette
-Name: Color palette by Paletton.com #6300u0kszqe95M6k+x1vAfLtQ4PColumns: 4
+Name: Color palette by Paletton.com #6300u0kszqe5JObiXyEvJfGAs4NColumns: 4
 
 #
  16 147  80     primary 0
-157 220 188     primary 1
- 62 181 121     primary 2
+184 225 204     primary 1
+ 76 185 130     primary 2
   1  88  44     primary 3
-  2  27  14     primary 4
+  0  27  13     primary 4
  21  91 133     secondary-1 0
-155 191 212     secondary-1 1
- 63 127 165     secondary-1 2
+181 204 218     secondary-1 1
+ 75 135 170     secondary-1 2
   5  52  80     secondary-1 3
-  3  16  24     secondary-1 4
+  1  16  24     secondary-1 4
 105 188  20     secondary-2 0
-209 243 174     secondary-2 1
-156 231  79     secondary-2 2
- 58 113   1     secondary-2 3
- 19  35   2     secondary-2 4
+223 245 201     secondary-2 1
+164 232  95     secondary-2 2
+ 57 113   1     secondary-2 3
+ 17  34   0     secondary-2 4
 209  67  23     complement 0
-255 200 183     complement 1
-255 128  88     complement 2
-125  31   2     complement 3
- 38  11   3     complement 4
+255 220 209     complement 1
+255 140 104     complement 2
+125  31   1     complement 3
+ 38   9   0     complement 4
