@@ -84,6 +84,10 @@ public class Water : MonoBehaviour
             Destroy(splish, lifetime+0.3f);
         }
 
+
+        // FOR TESTING!!!
+        // REMEMBER TO DELETE!!!
+      //  MoveBackward(10);
     }
 
     public void SpawnWater(float Left, float Width, float Top, float Bottom)
@@ -301,9 +305,10 @@ public class Water : MonoBehaviour
         // Doing this seprately because reasons
         for (int i = 0; i < vertices; i++)
         {
+            int index = ypositions.Count - 1;
             ypositions.Add(baseheight);
             xpositions.Add(left + width * xpositions.Count / edgecount);
-            Body.SetPosition(i, new Vector3(xpositions[i], baseheight, z));
+            Body.SetPosition(index, new Vector3(xpositions[index], baseheight, z));
             accelerations.Add(0);
             velocities.Add(0);
         }
@@ -366,5 +371,103 @@ public class Water : MonoBehaviour
             colliders[index].AddComponent<WaterDetector>();
         }
     }
+
+    // Remove verticies from the right end of the water and add them to the left.
+    void MoveBackward(int vertices)
+    {
+        // Have to destroy stuff first before removing them from the lists
+        for (int i = vertices; i > 0; i--)
+        {
+            Destroy(meshobjects[meshobjects.Count -  i]);
+            Destroy(colliders[colliders.Count - i]);
+            Destroy(meshes[meshes.Count - i]);
+        }
+        
+        // Clear out old values on the left
+        meshobjects.RemoveRange(meshobjects.Count - vertices, vertices);
+        colliders.RemoveRange(colliders.Count - vertices, vertices);
+        meshes.RemoveRange(meshes.Count - vertices, vertices);
+
+        xpositions.RemoveRange(xpositions.Count - 1 - vertices, vertices);
+        ypositions.RemoveRange(ypositions.Count - 1 - vertices, vertices);
+        velocities.RemoveRange(velocities.Count - 1 - vertices, vertices);
+        accelerations.RemoveRange(accelerations.Count - 1 - vertices, vertices);
+
+        // This is a thing that needs to happen for some reason.
+        int edgecount = Mathf.RoundToInt(width) * 5;
+
+        // Since there's 5 meshes per one unity "unit", according to the previous line, remove .2 to left for each mesh removed.
+        // Hopefully this works.
+        left -= 0.2f * vertices;
+        
+        
+        // Doing this seprately because reasons
+        for (int i = 0; i < vertices; i++)
+        {
+            ypositions.Insert(i, baseheight);
+            xpositions.Insert(i, left + width * xpositions.Count / edgecount);
+            Body.SetPosition(i, new Vector3(xpositions[i], baseheight, z));
+            accelerations.Insert(i, 0);
+            velocities.Insert(i, 0);
+        }
+
+
+
+        // Add new values to the right, hopefully.
+        for (int i = 0; i < vertices; i++)
+        {
+            //Make the mesh
+            meshes.Insert(i, new Mesh());
+
+            //Create the corners of the mesh
+            Vector3[] Vertices = new Vector3[4];
+            Vertices[0] = new Vector3(xpositions[i], ypositions[i], z);
+            Vertices[1] = new Vector3(xpositions[i + 1], ypositions[i + 1], z);
+            Vertices[2] = new Vector3(xpositions[i], bottom, z);
+            Vertices[3] = new Vector3(xpositions[i + 1], bottom, z);
+
+            //Set the UVs of the texture
+            Vector2[] UVs = new Vector2[4];
+            UVs[0] = new Vector2(0, 1);
+            UVs[1] = new Vector2(1, 1);
+            UVs[2] = new Vector2(0, 0);
+            UVs[3] = new Vector2(1, 0);
+
+            //Set where the triangles should be.
+            int[] tris = new int[6] { 0, 1, 3, 3, 2, 0 };
+
+            //Add all this data to the mesh.
+            meshes[i].vertices = Vertices;
+            meshes[i].uv = UVs;
+            meshes[i].triangles = tris;
+
+            //Create a holder for the mesh, set it to be the manager's child
+            meshobjects.Insert(i, Instantiate(watermesh, Vector3.zero, Quaternion.identity) as GameObject);
+
+            //index = meshobjects.Count - 1; // should be the same as the previous index, but better safe than sorry.
+
+            meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
+            meshobjects[i].transform.parent = transform;
+
+            //Create our colliders, set them be our child
+            colliders.Insert(i, new GameObject());
+
+            //index = colliders.Count - 1; // should be the same as the previous index, but better safe than sorry.
+
+            colliders[i].name = "Trigger";
+            colliders[i].AddComponent<BoxCollider2D>();
+            colliders[i].transform.parent = transform;
+
+            //Set the position and scale to the correct dimensions
+            colliders[i].transform.position = new Vector3(left + width * (i + 0.5f) / edgecount, baseheight - 0.5f, 0);
+            colliders[i].transform.localScale = new Vector3(width / edgecount, 1, 1);
+
+            //Add a WaterDetector and make sure they're triggers
+            colliders[i].GetComponent<BoxCollider2D>().isTrigger = true;
+            colliders[i].AddComponent<WaterDetector>();
+        }
+        
+    }
+
 
 }
