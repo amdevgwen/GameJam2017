@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Water : MonoBehaviour {
+public class Water : MonoBehaviour
+{
 
-    //Our renderer that'll make the top of the water visible
-    LineRenderer Body;
+	//Our renderer that'll make the top of the water visible
+	LineRenderer Body;
 
     //Our physics arrays
     List<float> xpositions = new List<float>();
@@ -18,20 +19,21 @@ public class Water : MonoBehaviour {
     List<GameObject> colliders = new List<GameObject>();
     List<Mesh> meshes = new List<Mesh>();
 
-    //Our particle system
-    public GameObject splash;
 
-    //The material we're using for the top of the water
-    public Material mat;
+	//Our particle system
+	public GameObject splash;
 
-    //The GameObject we're using for a mesh
-    public GameObject watermesh;
+	//The material we're using for the top of the water
+	public Material mat;
 
-    //All our constants
-    const float springconstant = 0.02f;
-    const float damping = 0.04f;
-    const float spread = 0.05f;
-    const float z = -1f;
+	//The GameObject we're using for a mesh
+	public GameObject watermesh;
+
+	//All our constants
+	const float springconstant = 0.02f;
+	const float damping = 0.04f;
+	const float spread = 0.05f;
+	const float z = -1f;
 
     //The properties of our water
     float baseheight;
@@ -39,13 +41,14 @@ public class Water : MonoBehaviour {
     float bottom;
     float width;
 
-    
+	BoxCollider2D box;
 
-    void Start()
-    {
-        //Spawning our water
-        SpawnWater(-10,20,0,-3);
-    }
+	void Start()
+	{
+        
+		//Spawning our water
+		SpawnWater(-50, 100, -2, -10);
+	}
 
     
     public void Splash(float xpos, float velocity)
@@ -59,19 +62,19 @@ public class Water : MonoBehaviour {
             //Find which spring we're touching
             int index = Mathf.RoundToInt((xpositions.Count-1)*(xpos / (xpositions[xpositions.Count-1] - xpositions[0])));
 
-            //Add the velocity of the falling object to the spring
-            velocities[index] += velocity * 2f;
+			//Add the velocity of the falling object to the spring
+			velocities [index] += velocity * 2f;
 
-            //Set the lifetime of the particle system.
-            float lifetime = 0.93f + Mathf.Abs(velocity)*0.07f;
+			//Set the lifetime of the particle system.
+			float lifetime = 0.93f + Mathf.Abs(velocity) * 0.07f;
 
-            //Set the splash to be between two values in Shuriken by setting it twice.
-            splash.GetComponent<ParticleSystem>().startSpeed = 8+2*Mathf.Pow(Mathf.Abs(velocity),0.5f);
-            splash.GetComponent<ParticleSystem>().startSpeed = 9 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
-            splash.GetComponent<ParticleSystem>().startLifetime = lifetime;
+			//Set the splash to be between two values in Shuriken by setting it twice.
+			splash.GetComponent<ParticleSystem>().startSpeed = 8 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
+			splash.GetComponent<ParticleSystem>().startSpeed = 9 + 2 * Mathf.Pow(Mathf.Abs(velocity), 0.5f);
+			splash.GetComponent<ParticleSystem>().startLifetime = lifetime;
 
-            //Set the correct position of the particle system.
-            Vector3 position = new Vector3(xpositions[index],ypositions[index]-0.35f,5);
+			//Set the correct position of the particle system.
+			Vector3 position = new Vector3(xpositions [index], ypositions [index] - 0.35f, 5);
 
             //This line aims the splash towards the middle. Only use for small bodies of water:
             Quaternion rotation = Quaternion.LookRotation(new Vector3(xpositions[Mathf.FloorToInt(xpositions.Count / 2)], baseheight + 8, 5) - position);
@@ -180,9 +183,6 @@ public class Water : MonoBehaviour {
             colliders[i].AddComponent<WaterDetector>();
 
         }
-
-        
-        
         
     }
 
@@ -250,11 +250,24 @@ public class Water : MonoBehaviour {
         UpdateMeshes();
 	}
 
-    void OnTriggerStay2D(Collider2D Hit)
-    {
-        //Bonus exercise. Fill in your code here for making things float in your water.
-        //You might want to even include a buoyancy constant unique to each object!
-    }
+
+	void OnTriggerStay2D(Collider2D Hit)
+	{
+		if (Hit.gameObject.GetComponent<FloatingObject>())
+		{
+			FloatingObject k = Hit.gameObject.GetComponent<FloatingObject>();
+			Rigidbody2D rbd2d = Hit.GetComponent<Rigidbody2D>();
+			foreach (Transform m in k.boyancyTargets)
+			{
+				if (box.OverlapPoint(m.position))
+				{
+					rbd2d.AddForceAtPosition(Vector2.up * k.boyancy, m.position, ForceMode2D.Force);
+				}
+			}
+		}
+		//Bonus exercise. Fill in your code here for making things float in your water.
+		//You might want to even include a buoyancy constant unique to each object!
+	}
 
 
     // Remove verticies from the left end of the water and add them to the right.
