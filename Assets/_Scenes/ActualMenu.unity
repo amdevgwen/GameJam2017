@@ -3546,13 +3546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964f368e7bcf98a429915c627207ac13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 626769741}
-  Jump: []
-  Footsteps: []
-  drowningSound: []
-  Wave: {fileID: 0}
-  SpawnSound: {fileID: 0}
-  dieSound: {fileID: 0}
+  sounds: {fileID: 0}
 --- !u!1 &664660214
 GameObject:
   m_ObjectHideFlags: 0

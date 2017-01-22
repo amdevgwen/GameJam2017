@@ -4,51 +4,50 @@ using UnityEngine;
 
 public class PlayerAudio : MonoBehaviour
 {
-
-	public AudioSource audioSource;
-	public AudioClip[] Jump;
-	public AudioClip[] Footsteps;
-	public AudioClip[] drowningSound;
-	public AudioClip Wave;
-	public AudioClip SpawnSound;
-	public AudioClip dieSound;
-    
+    //public AudioSource audioSource;
+    public AudioList sounds;
 
 
-	// Use this for initialization
-	//	void Start()
-	//	{
-	//		audioSource = GetComponent<AudioSource>();
-	//	}
+    // Use this for initialization
+    void Awake()
+    {
+        //sounds = ScriptableObject.CreateInstance("Sounds") as AudioList;
+    }
 
-	public void PlayJumpSound()
+    public void PlayJumpSound()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), Jump);
+        if(sounds != null)
+		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Jump);
 	}
 
 	public void PlaySpawnSound()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), SpawnSound);
+        if (sounds != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.SpawnSound);
 	}
 
 	public void PlayDieSounds()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), dieSound);
+        if (sounds != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.dieSound);
 	}
 
 	public void PlayWaveSound()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), Wave);
+        if (sounds != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Wave);
 	}
 
 	public void PlayFootsteps()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), Footsteps);
+        if (sounds != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Footsteps);
 	}
 
 	public void PlayDrowningSound()
 	{
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), drowningSound);
+        if (sounds != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.drowningSound);
 	}
 }
 

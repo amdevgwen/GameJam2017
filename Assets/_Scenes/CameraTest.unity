@@ -784,7 +784,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipCreakSounds:
   - {fileID: 0}
-  soundTimer: 1
+  minSoundTimer: 0
+  maxSoundTimer: 0
 --- !u!1 &663564261
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876298384aa37924f8908014f54e3527, type: 3}
+  m_Name: Main Audio List
+  m_EditorClassIdentifier: 
+  Jump: {fileID: 8300000, guid: e742a994a6f30e6419567c0c9439ee9e, type: 3}
+  drowningSound: {fileID: 8300000, guid: eeb7d349481cdf4498104c65f3e8b610, type: 3}
+  Wave: {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
+  SpawnSound: {fileID: 8300000, guid: d00de748ca9e4a547b96321cafd54c57, type: 3}
+  dieSound: {fileID: 8300000, guid: f1f4f69c81bf5e748b9abd18b0ab61a9, type: 3}
+  Footsteps:
+  - {fileID: 8300000, guid: 79f5ada975be05045803bbb4c7d9cc1c, type: 3}
+  - {fileID: 8300000, guid: c8ac267f2d71fcb4bb62593b900a9f4c, type: 3}
+  - {fileID: 8300000, guid: 6a9ec478c859e3e46a17aa2516e9498d, type: 3}
+  - {fileID: 8300000, guid: 1a619a104e0969a4b824b6f38edb8e27, type: 3}
+  ShipCreakSounds:
+  - {fileID: 8300000, guid: 4576f82c9940c5e49ad326b6f1a4da1a, type: 3}
+  - {fileID: 8300000, guid: f7ee25bb4a489c142beb372bd3b69d44, type: 3}
+  - {fileID: 8300000, guid: b6c8160f5a0a0e2449a7cf18cc478200, type: 3}
+  superRareCreak: {fileID: 0}
