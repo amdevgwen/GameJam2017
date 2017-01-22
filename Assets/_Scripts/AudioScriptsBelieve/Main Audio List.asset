@@ -25,4 +25,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4576f82c9940c5e49ad326b6f1a4da1a, type: 3}
   - {fileID: 8300000, guid: f7ee25bb4a489c142beb372bd3b69d44, type: 3}
   - {fileID: 8300000, guid: b6c8160f5a0a0e2449a7cf18cc478200, type: 3}
-  superRareCreak: {fileID: 0}
+  superRareCreak: {fileID: 8300000, guid: 2e781db87a17e044198edafbfc769fad, type: 3}
