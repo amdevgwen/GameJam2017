@@ -46,17 +46,15 @@ public class PlayerControl : NetworkBehaviour
 		//Take Player movement
 		if (isLocalPlayer)
 		{
-			//prevent action
-			//if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
-			//{
-			//    if (Input.GetKeyDown(KeyCode.RightArrow))
-			//        Debug.Log("Can't Move - Player is Dead");
-			//    return;
-			//}
-			//Ground anim
-			//_anim.SetBool("On Ground", isGrounded);
+            //prevent action
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
+            {
+                return;
+            }
+            //Ground anim
+            //_anim.SetBool("On Ground", isGrounded);
 
-			float direction = 0;
+            float direction = 0;
 
 			//Movement
 			if ((direction = Input.GetAxis("Horizontal")) != 0)
