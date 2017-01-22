@@ -8,6 +8,8 @@ public class WaveEngine : NetworkBehaviour
     private LineRenderer WaterLine;
 
     public Material mat;
+    public GameObject mesh;
+
 
     public GameObject ColliderBase;
 
@@ -42,6 +44,10 @@ public class WaveEngine : NetworkBehaviour
     public int Choppiness = 2;
 
     List<WaterCollider> colliders = new List<WaterCollider>();
+
+
+    List<GameObject> meshobjects = new List<GameObject>();
+    List<Mesh> meshes = new List<Mesh>();
 
     private void Start()
     {
@@ -80,21 +86,44 @@ public class WaveEngine : NetworkBehaviour
             box.size = sizeBox;
 
             NetworkServer.Spawn(collider);
-            if (Previous != null)
-            {
-                ////Screw the Joints!!
-                //HingeJoint2D joint = collider.AddComponent<HingeJoint2D>();
-                //joint.connectedBody = Previous.GetComponent<Rigidbody2D>();
-                //joint.autoConfigureConnectedAnchor = false;
-                //joint.anchor = Vector2.zero;
-                //joint.connectedAnchor = new Vector2(deltaSampleWidth + COLLIDER_OFFSET, 0);
-            }
-            else
-            {
-                //freeze the first
-                //collider.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
-            }
-            Previous = collider;
+            float xInit = xLocMin + deltaSampleWidth * i;
+            float xNext = xLocMin + deltaSampleWidth * (i + 1);
+            float yInit = yLoc;
+            float yNext = yLoc;
+            WaterLine.SetPosition(i, new Vector3(xInit, yInit, Z_DEPTH));
+            //Make the mesh
+            meshes.Add(new Mesh());
+
+
+
+            //Create the corners of the mesh
+            Vector3[] Vertices = new Vector3[4];
+            Vertices[0] = new Vector3(xInit, yInit, Z_DEPTH);
+            Vertices[1] = new Vector3(xNext, yNext, Z_DEPTH);
+            Vertices[2] = new Vector3(xInit, WAVE_DEPTH, Z_DEPTH);
+            Vertices[3] = new Vector3(xNext, WAVE_DEPTH, Z_DEPTH);
+
+            //Set the UVs of the texture
+            Vector2[] UVs = new Vector2[4];
+            UVs[0] = new Vector2(0, 1);
+            UVs[1] = new Vector2(1, 1);
+            UVs[2] = new Vector2(0, 0);
+            UVs[3] = new Vector2(1, 0);
+
+            //Set where the triangles should be.
+            int[] tris = new int[6] { 0, 1, 3, 3, 2, 0 };
+
+            //Add all this data to the mesh.
+            meshes[i].vertices = Vertices;
+            meshes[i].uv = UVs;
+            meshes[i].triangles = tris;
+
+            //Create a holder for the mesh, set it to be the manager's child
+            GameObject meshObject = Instantiate(mesh, Vector3.zero, Quaternion.identity) as GameObject;
+            meshobjects.Add(meshObject);
+            meshobjects[i].GetComponent<MeshFilter>().mesh = meshes[i];
+            meshobjects[i].transform.parent = transform;
+            NetworkServer.Spawn(meshObject);
         }
         //freeze the last
         //Previous.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePositionY;
@@ -110,6 +139,8 @@ public class WaveEngine : NetworkBehaviour
 
         CurrentTime += TimeIncrement;
 
+        float[] yData = new float[colliders.Count + 1];
+
         foreach(var body in colliders)
         {
             Vector3 parentPosition;
@@ -121,15 +152,30 @@ public class WaveEngine : NetworkBehaviour
             {
                 parentPosition = Vector3.zero;
             }
-
-            Vector2 newPos = new Vector2(body.transform.position.x, FindY(  Amplitude, Frequency, Speed, deltaSample * index, CurrentTime));
+            float newY = FindY(Amplitude, Frequency, Speed, deltaSample * index, CurrentTime);
+            Vector2 newPos = new Vector2(body.transform.position.x, newY);
             newPos = new Vector2(newPos.x + parentPosition.x, newPos.y + parentPosition.y);
 
             WaterLine.SetPosition(index, newPos);
 
-
             body.transform.position = newPos;
+
+            yData[index] = newY;
+
             index++;
+        }
+
+        yData[yData.Length - 1] = FindY(Amplitude, Frequency, Speed, deltaSample * (index + 1), CurrentTime);
+
+        int yIndex = 0;
+        foreach (var meshObj in meshes)
+        {
+            Vector3[] Vertices = meshObj.vertices;
+            Vertices[0] = new Vector3(Vertices[0].x, yData[yIndex], Z_DEPTH);
+            Vertices[1] = new Vector3(Vertices[1].x, yData[yIndex + 1], Z_DEPTH);
+            meshObj.vertices = Vertices;
+            meshObj.RecalculateBounds();
+            yIndex++;
         }
     }
 

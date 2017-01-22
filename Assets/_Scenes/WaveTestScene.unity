@@ -218,7 +218,7 @@ Prefab:
     - target: {fileID: 224691296830208308, guid: 17e2ba145e40c084f85f93ac792f6651,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 31
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
@@ -536,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 4437615c3e751844f98d32d8b462f6b8, type: 2}
+  mesh: {fileID: 100000, guid: bd7d08261984f0f47981e1d04ab665d1, type: 2}
   ColliderBase: {fileID: 1912199937905570, guid: 9e785b02677850a43bfb7113e6fa8c8e,
     type: 2}
   SampleSize: 60
