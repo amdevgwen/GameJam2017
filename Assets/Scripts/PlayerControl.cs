@@ -39,6 +39,8 @@ public class PlayerControl : NetworkBehaviour
 	public override void OnStartLocalPlayer()
 	{
 		GetComponent<SpriteRenderer>().color = ColorPalette.cp.green4;
+		var ps = GetComponentInChildren<ParticleSystem>().main;
+		ps.startColor = ColorPalette.cp.green3;
 	}
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
