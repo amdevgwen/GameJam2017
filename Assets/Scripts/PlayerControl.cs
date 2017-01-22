@@ -31,6 +31,11 @@ public class PlayerControl : NetworkBehaviour
 		_sprite = GetComponent<SpriteRenderer>();
 	}
 
+	void Start()
+	{
+		transform.position = new Vector3(transform.position.x, transform.position.y, -5);
+	}
+
 	public override void OnStartLocalPlayer()
 	{
 		GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
