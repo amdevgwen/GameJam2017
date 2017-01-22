@@ -31,9 +31,11 @@ public class Water : MonoBehaviour
 
 	//All our constants
 	const float springconstant = 0.02f;
-	const float damping = 0.04f;
-	const float spread = 0.05f;
-	const float z = -1f;
+//    const float damping = 0.04f;
+    const float damping = 0.025f;
+//    const float spread = 0.05f;
+    const float spread = 0.15f;
+    const float z = -1f;
 
     //The properties of our water
     float baseheight;
@@ -41,14 +43,17 @@ public class Water : MonoBehaviour
     float bottom;
     float width;
 
+    float time = 0;
+
 	BoxCollider2D box;
 
 	void Start()
 	{
         
 		//Spawning our water
-		SpawnWater(-50, 100, -2, -10);
-	}
+		//SpawnWater(-15, 30, -2, -10);
+        SpawnWater(-50, 100, -2, -10);
+    }
 
     
     public void Splash(float xpos, float velocity)
@@ -211,12 +216,21 @@ public class Water : MonoBehaviour
     //Called regularly by Unity
     void FixedUpdate()
     {
-        /* // For testing porpoises.
+        // For testing porpoises.
+        /*
         if (Input.GetMouseButtonDown(0))
         {
-            MoveForward(10);
+            MakeWave(50 * Mathf.Sin(Time.deltaTime));
         }
         */
+        time += Time.deltaTime;
+        // Shouldn't need to do a loop, but better safe than sorry.
+        for (; time > Mathf.PI;)
+        {
+            time -=  Mathf.PI;
+        }
+
+        MakeWave(200 * Mathf.Sin(time));
 
         //Here we use the Euler method to handle all the physics of our springs:
         for (int i = 0; i < xpositions.Count ; i++)
@@ -481,6 +495,12 @@ public class Water : MonoBehaviour
             colliders[i].AddComponent<WaterDetector>();
         }
         */
+    }
+
+    void MakeWave(float height)
+    {
+        ypositions[ypositions.Count - 1] += height;
+        ypositions[ypositions.Count - 2] += height;
     }
 
 
