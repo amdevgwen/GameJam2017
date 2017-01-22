@@ -10,11 +10,15 @@ public class PlaySoundOnTimer : MonoBehaviour {
     public float maxSoundTimer;
     float nextSoundTime;
 
+    int soundPlayCount = 0;
+    int playSoundCount = 0;
 
 	// Use this for initialization
 	void Start () {
         audioSource = GetComponent<AudioSource>();
         nextSoundTime = Time.time + minSoundTimer;
+
+        playSoundCount = Random.Range(15, 30);
     }
 	
 	// Update is called once per frame
@@ -22,7 +26,14 @@ public class PlaySoundOnTimer : MonoBehaviour {
 		if(Time.time >= nextSoundTime)
         {
             nextSoundTime = Time.time + Random.Range(minSoundTimer, maxSoundTimer);
-            SoundManager.Instance.PlayAudio(audioSource, soundList.ShipCreakSounds);
+            soundPlayCount++;
+            if (soundPlayCount > playSoundCount)
+            {
+                SoundManager.Instance.PlayAudio(audioSource, soundList.superRareCreak);
+                playSoundCount = Random.Range(20, 50);
+            }
+            else
+                SoundManager.Instance.PlayAudio(audioSource, soundList.ShipCreakSounds);
         }
 	}
 }
