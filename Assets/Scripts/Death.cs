@@ -23,12 +23,14 @@ public class Death : NetworkBehaviour
 
     private Animator _anim;
     private Rigidbody2D _body;
+    private PlayerAudio _playerAudio;
 
     public GameObject Target;
     private void Awake()
     {
         _anim = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
+        _playerAudio = GetComponent<PlayerAudio>();
         //find something!
         if (Target == null)
         {
@@ -129,6 +131,7 @@ public class Death : NetworkBehaviour
 
             isDead = false;
             isRespawn = true;
+            _playerAudio.PlaySpawnSound();
 
             CmdSyncState(isDead, isRespawn);
         }
