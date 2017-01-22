@@ -26,20 +26,22 @@ public class WaveEngine : NetworkBehaviour
 
     private const float COLLIDER_OFFSET = 0.2f;
 
+    [SyncVar]
     private float CurrentTime = 0.0f;
-    //private float MaxTime = 10.0f;
-
+    [SyncVar]
     public float Amplitude = 1.0f;
+    [SyncVar]
     public float Speed = 10.0f;
+    [SyncVar]
     public float Frequency = 4.0f;
+    [SyncVar]
     public float TimeIncrement = 0.01f;
 
     List<WaterCollider> colliders = new List<WaterCollider>();
 
     private void Start()
     {
-        //if (isServer)
-            InitializeCollider();
+        InitializeCollider();
     }
 
     private void InitializeCollider()
@@ -65,12 +67,15 @@ public class WaveEngine : NetworkBehaviour
             colliders.Add(collider.GetComponent<WaterCollider>());
             BoxCollider2D box = collider.GetComponent<BoxCollider2D>();
 
+
+
             //set waterline
             WaterLine.SetPosition(i, colliderPos);
 
             Vector2 sizeBox = new Vector2(deltaSampleWidth, 0.5f);
             box.size = sizeBox;
 
+            NetworkServer.Spawn(collider);
             if (Previous != null)
             {
                 ////Screw the Joints!!

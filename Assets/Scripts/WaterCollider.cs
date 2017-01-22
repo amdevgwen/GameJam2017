@@ -25,7 +25,6 @@ public class WaterCollider : MonoBehaviour
         
         if (collision.tag == "Boat")
         {
-            Debug.Log("is boat");
             collision.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(
                 new Vector2(0, PushStrength), transform.position, ForceMode2D.Force);
         }

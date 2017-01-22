@@ -23,7 +23,9 @@ GameObject:
   - component: {fileID: 50565443605790026}
   - component: {fileID: 61121299362950622}
   - component: {fileID: 114005370972110376}
-  m_Layer: 0
+  - component: {fileID: 114220569301558400}
+  - component: {fileID: 114884028557105456}
+  m_Layer: 4
   m_Name: Base Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +90,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dafa2e905a42cd4dafa7329888033b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PushStrength: 1000
+--- !u!114 &114220569301558400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912199937905570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 158
+    i1: 120
+    i2: 91
+    i3: 2
+    i4: 103
+    i5: 120
+    i6: 80
+    i7: 164
+    i8: 59
+    i9: 251
+    i10: 113
+    i11: 19
+    i12: 230
+    i13: 250
+    i14: 140
+    i15: 142
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114884028557105456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912199937905570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212818049343479548
 SpriteRenderer:
   m_ObjectHideFlags: 1
