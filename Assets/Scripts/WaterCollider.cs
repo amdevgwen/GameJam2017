@@ -48,7 +48,7 @@ public class WaterCollider : MonoBehaviour
 
         //This line aims the splash towards the middle. Only use for small bodies of water:
         Quaternion rotation = Quaternion.LookRotation(new Vector3(0, 0 + 8, 5) - position);
-        `
+
         //Create the splash and tell it to destroy itself.
         GameObject splish = Instantiate(particleSystem.gameObject, position, rotation) as GameObject;
         Destroy(splish, lifetime + 0.3f);

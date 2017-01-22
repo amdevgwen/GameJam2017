@@ -17,37 +17,37 @@ public class PlayerAudio : MonoBehaviour
     public void PlayJumpSound()
 	{
         if(sounds != null)
-		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Jump);
+		SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Jump);
 	}
 
 	public void PlaySpawnSound()
 	{
         if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.SpawnSound);
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.SpawnSound);
 	}
 
 	public void PlayDieSounds()
 	{
-        if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.dieSound);
+        if (AudioRef.instance != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.dieSound);
 	}
 
 	public void PlayWaveSound()
 	{
         if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Wave);
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Wave);
 	}
 
 	public void PlayFootsteps()
 	{
-        if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.Footsteps);
+        if (AudioRef.instance != null)
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Footsteps);
 	}
 
 	public void PlayDrowningSound()
 	{
         if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), sounds.drowningSound);
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.drowningSound);
 	}
 }
 
