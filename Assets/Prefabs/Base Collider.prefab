@@ -89,9 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dafa2e905a42cd4dafa7329888033b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PushStrength: 1000
+  PushStrength: 150
   SplashVelocity: 50
-  particleSystem: {fileID: 0}
+  particleSystem: {fileID: 19800000, guid: 47bfa965e40c98948a14a77841013404, type: 2}
 --- !u!114 &114220569301558400
 MonoBehaviour:
   m_ObjectHideFlags: 1
