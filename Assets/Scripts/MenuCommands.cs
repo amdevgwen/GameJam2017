@@ -34,6 +34,9 @@ public class MenuCommands : MonoBehaviour
 
 	public void Host()
 	{
+		if (_netMan.client != null)
+			_netMan.StopClient();
+
 		_netMan.networkPort = 7777;
 
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();

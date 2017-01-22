@@ -9145,12 +9145,12 @@ Prefab:
     - target: {fileID: 114202862641317066, guid: 17e2ba145e40c084f85f93ac792f6651,
         type: 2}
       propertyPath: showGUI
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224691296830208308, guid: 17e2ba145e40c084f85f93ac792f6651,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 31
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 17e2ba145e40c084f85f93ac792f6651, type: 2}
