@@ -23,7 +23,7 @@ public class WaterCollider : MonoBehaviour
 		transform.position = position;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnTriggerStay2D(Collider2D collision)
 	{
         Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Boat")

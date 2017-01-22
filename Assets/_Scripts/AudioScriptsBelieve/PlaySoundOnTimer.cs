@@ -33,7 +33,10 @@ public class PlaySoundOnTimer : MonoBehaviour {
                 playSoundCount = Random.Range(20, 50);
             }
             else
-                SoundManager.Instance.PlayAudio(audioSource, soundList.ShipCreakSounds);
+            {
+
+            }
+                //SoundManager.Instance.PlayAudio(audioSource, soundList.ShipCreakSounds);
         }
 	}
 }
