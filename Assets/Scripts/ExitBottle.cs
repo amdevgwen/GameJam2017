@@ -29,7 +29,7 @@ public class ExitBottle : MonoBehaviour {
 
         // Delete existing bottle
         // TODO: Find out what the bottle object is actually called.
-        Destroy(GameObject.Find("bottle object"));
+        Destroy(GameObject.Find("Bottle"));
 
         // Delete existing water
         // TODO: Find out what the water object is actually called.
@@ -52,5 +52,11 @@ public class ExitBottle : MonoBehaviour {
 
         // Create new bottle.
         Instantiate(bottle);
+    }
+
+    void OnTriggerEnter2D(Collider collider)
+    {
+        Debug.Log("Moves ");
+        Exit();
     }
 }
