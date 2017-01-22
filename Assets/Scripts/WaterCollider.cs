@@ -25,17 +25,18 @@ public class WaterCollider : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        
-		if (collision.tag == "Boat")
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Boat")
 		{
-			collision.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(
+            
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(
 				new Vector2(0, PushStrength), transform.position, ForceMode2D.Force);
 
 			Splash();
 		}
 	}
 
-	public void Splash()
+    public void Splash()
 	{
 		float lifetime = 0.93f + Mathf.Abs(SplashVelocity) * 0.07f;
 
