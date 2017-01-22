@@ -305,7 +305,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a619a104e0969a4b824b6f38edb8e27, type: 3}
   drowningSound:
   - {fileID: 8300000, guid: eeb7d349481cdf4498104c65f3e8b610, type: 3}
-  Wave: {fileID: 8300000, guid: 19528c729d7fe1e49abf81c74ba98512, type: 3}
+  Wave: {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
   SpawnSound: {fileID: 8300000, guid: d00de748ca9e4a547b96321cafd54c57, type: 3}
   dieSound: {fileID: 8300000, guid: f1f4f69c81bf5e748b9abd18b0ab61a9, type: 3}
 --- !u!114 &114734309338667330
