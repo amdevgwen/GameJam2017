@@ -38,7 +38,7 @@ public class PlayerControl : NetworkBehaviour
 
 	public override void OnStartLocalPlayer()
 	{
-		GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
+		GetComponent<SpriteRenderer>().color = ColorPalette.cp.green4;
 	}
 
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
