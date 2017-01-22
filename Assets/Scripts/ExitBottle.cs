@@ -23,6 +23,8 @@ public class ExitBottle : MonoBehaviour {
          * Delete existing bottle
          * Delete existing water
          * Play animation
+         * 
+         * Other stuff maybe?
          */
 
         // Delete existing bottle
