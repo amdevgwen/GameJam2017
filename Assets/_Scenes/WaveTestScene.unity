@@ -438,7 +438,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -547,6 +547,8 @@ MonoBehaviour:
   TimeIncrement: 0.01
   AmplitudeRandomNoise: 0.2
   Choppiness: 2
+  SplashPrefab: {fileID: 100000, guid: 47bfa965e40c98948a14a77841013404, type: 2}
+  SplashParticleSystem: {fileID: 0}
 --- !u!4 &2047372653
 Transform:
   m_ObjectHideFlags: 0

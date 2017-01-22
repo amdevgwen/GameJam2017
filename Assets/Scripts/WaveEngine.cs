@@ -49,8 +49,15 @@ public class WaveEngine : NetworkBehaviour
     List<GameObject> meshobjects = new List<GameObject>();
     List<Mesh> meshes = new List<Mesh>();
 
+    public GameObject SplashPrefab;
+
+    public ParticleSystem SplashParticleSystem;
+
     private void Start()
     {
+        GameObject SpashObject = GameObject.Instantiate(SplashPrefab, transform);
+        NetworkServer.Spawn(SpashObject);
+        SplashParticleSystem = SpashObject.GetComponent<ParticleSystem>();
         InitializeCollider();
     }
 
@@ -74,7 +81,9 @@ public class WaveEngine : NetworkBehaviour
 
             Vector3 colliderPos = new Vector3(xLocMin + deltaSampleWidth * i, yLoc, 0);
             GameObject collider = GameObject.Instantiate<GameObject>(ColliderBase, colliderPos, Quaternion.identity);
-            colliders.Add(collider.GetComponent<WaterCollider>());
+            WaterCollider watrcld = collider.GetComponent<WaterCollider>();
+            watrcld.particleSystem = SplashParticleSystem;
+            colliders.Add(watrcld);
             BoxCollider2D box = collider.GetComponent<BoxCollider2D>();
 
 

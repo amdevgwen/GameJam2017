@@ -64,6 +64,8 @@ MonoBehaviour:
   TimeIncrement: 0.01
   AmplitudeRandomNoise: 0.2
   Choppiness: 2
+  SplashPrefab: {fileID: 100000, guid: 47bfa965e40c98948a14a77841013404, type: 2}
+  SplashParticleSystem: {fileID: 0}
 --- !u!114 &114439065450217258
 MonoBehaviour:
   m_ObjectHideFlags: 1
