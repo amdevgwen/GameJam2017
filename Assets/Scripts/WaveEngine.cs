@@ -12,7 +12,7 @@ public class WaveEngine : NetworkBehaviour
     public GameObject ColliderBase;
 
     [SerializeField]
-    private int SampleSize = 60; //number of sample in the wave
+    private int SampleSize = 120; //number of sample in the wave
     [SerializeField]
     private float WaveDistance = 50; //expand from center
 
@@ -38,6 +38,8 @@ public class WaveEngine : NetworkBehaviour
     public float TimeIncrement = 0.01f;
     [SyncVar]
     public float AmplitudeRandomNoise = 0.2f;
+    [SyncVar]
+    public int Choppiness = 2;
 
     List<WaterCollider> colliders = new List<WaterCollider>();
 
@@ -120,7 +122,7 @@ public class WaveEngine : NetworkBehaviour
 
     private float FindY(float amp, float freq, float speed, float pos, float time)
     {
-        return Mathf.PerlinNoise(Time.time, 0f) * ((amp * amp) * (Random.Range(1f, 1f + AmplitudeRandomNoise) + 0.5f)) * Mathf.Sin(2 * Mathf.PI * freq * ((pos / speed) + time));
+        return Mathf.PerlinNoise(Time.time, 0f) * (Mathf.Pow(amp, Choppiness) * (Random.Range(1f, 1f + AmplitudeRandomNoise) + 0.5f)) * Mathf.Sin(2 * Mathf.PI * freq * ((pos / speed) + time));
     }
 
     /*
