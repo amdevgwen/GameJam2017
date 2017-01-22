@@ -8,10 +8,16 @@ public class PlayerControl : NetworkBehaviour
 	public float runPower;
 	public float maxRunSpeed;
 	public float jumpPower;
-	public bool isGrounded;
 
 	private Rigidbody2D _rigid;
 	private Animator _anim;
+
+    [SyncVar]
+    public bool isGrounded;
+    [SyncVar]
+    public bool isRunning;
+    [SyncVar]
+    public bool isJumping;
 
 	void Awake()
 	{
@@ -19,67 +25,86 @@ public class PlayerControl : NetworkBehaviour
 		_rigid = GetComponent<Rigidbody2D>();
 	}
 
-	// the Update loop contains a very simple example of moving the character around and controlling the animation
-	void Update()
+    public override void OnStartLocalPlayer()
+    {
+        GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
+    }
+
+    public override void OnStartClient()
+    {
+        Debug.Log("Calling On Start Client");
+        base.OnStartClient();
+    }
+
+    // the Update loop contains a very simple example of moving the character around and controlling the animation
+    void Update()
 	{
-		//do not update if not local
-		if (!isLocalPlayer)
-			return;
+		//Take Player movement
+		if (isLocalPlayer)
+        {
+            //prevent action
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
+            {
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                    Debug.Log("Can't Move - Player is Dead");
+                return;
+            }
+            //Ground anim
+            _anim.SetBool("On Ground", isGrounded);
 
-		//Ground anim
-		_anim.SetBool("On Ground", isGrounded);
+            float direction = 0;
 
-		float direction = 0;
+            //Movement
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                //Right facing
+                if (transform.localScale.x > 0f)
+                    transform.localScale = new Vector3(-1, 1, 1);
 
-		//Movement
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			//Right facing
-			if (transform.localScale.x > 0f)
-				transform.localScale = new Vector3(-1, 1, 1);
+                //Moving
+                _anim.SetBool("Running", true);
 
-			//Moving
-			_anim.SetBool("Running", true);
+                //Dir
+                direction = 1;
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                //Left facing
+                if (transform.localScale.x < 0f)
+                    transform.localScale = new Vector3(1, 1, 1);
 
-			//Dir
-			direction = 1;
-		}
-		else if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			//Left facing
-			if (transform.localScale.x < 0f)
-				transform.localScale = new Vector3(1, 1, 1);
+                //Moving
+                _anim.SetBool("Running", true);
 
-			//Moving
-			_anim.SetBool("Running", true);
+                //Dir
+                direction = -1;
+            }
+            else
+            {
+                //Not moving
+                _anim.SetBool("Running", false);
+            }
 
-			//Dir
-			direction = -1;
-		}
-		else
-		{
-			//Not moving
-			_anim.SetBool("Running", false);
-		}
+            //Dampen air movement
+            if (!isGrounded)
+                direction /= 2;
 
-		//Dampen air movement
-		if (!isGrounded)
-			direction /= 2;
+            //Movement
+            _rigid.AddForce(new Vector2(runPower * direction, 0));
 
-		//Movement
-		_rigid.AddForce(new Vector2(runPower * direction, 0));
+            //Clamp horizontal velocity
+            _rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
+            _rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
 
-		//Clamp horizontal velocity
-		_rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
-		_rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
+            //Jumping
+            if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                _rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
 
-		//Jumping
-		if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-		{
-			_rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
-
-			_anim.SetTrigger("Jump");
-		}
+                _anim.SetTrigger("Jump");
+            }
+        }
+        //Everybody else now
 	}
 
 	void OnTriggerStay2D(Collider2D other)
@@ -103,4 +128,6 @@ public class PlayerControl : NetworkBehaviour
 			_anim.SetBool("In Water", false);
 		}
 	}
+
+
 }
