@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+// https://gamedevelopment.tutsplus.com/tutorials/creating-dynamic-2d-water-effects-in-unity--gamedev-14143
 public class Water : MonoBehaviour
 {
 
@@ -46,6 +47,9 @@ public class Water : MonoBehaviour
     float time = 0;
 
 	BoxCollider2D box;
+
+    // pop pop
+    float magnitude = 1f;
 
 	void Start()
 	{
@@ -225,12 +229,23 @@ public class Water : MonoBehaviour
         */
         time += Time.deltaTime;
         // Shouldn't need to do a loop, but better safe than sorry.
-        for (; time > Mathf.PI;)
+        for (; time >  1f * Mathf.PI;)
         {
-            time -=  Mathf.PI;
+            time -= 1f * Mathf.PI;
+            /*
+            if (magnitude > 0f)
+            {
+                magnitude = 0f;
+            }
+            else
+            {
+                magnitude = 1f;
+            }
+            */
         }
 
-        MakeWave(200 * Mathf.Sin(time));
+
+        MakeWave(200  * Mathf.Sin(time) * magnitude);
 
 		//Here we use the Euler method to handle all the physics of our springs:
 		for (int i = 0; i < xpositions.Count; i++)
@@ -296,7 +311,7 @@ public class Water : MonoBehaviour
 		//You might want to even include a buoyancy constant unique to each object!
 	}
 
-
+    // This has issues, but kind of works.
 	// Remove verticies from the left end of the water and add them to the right.
 	void MoveForward(int vertices)
 	{
@@ -395,9 +410,11 @@ public class Water : MonoBehaviour
 		}
 	}
 
-	// Remove verticies from the right end of the water and add them to the left.
 
-	void MoveBackward(int vertices)
+    // This doesn't work.  
+    // DO NOT USE!!!
+    // Remove verticies from the right end of the water and add them to the left.
+    void MoveBackward(int vertices)
 	{
 		// Need this later
 		int xLength = xpositions.Count;
@@ -498,8 +515,17 @@ public class Water : MonoBehaviour
 
     void MakeWave(float height)
     {
-        ypositions[ypositions.Count - 1] += height;
-        ypositions[ypositions.Count - 2] += height;
+        /*
+        if (height == 0)
+        {
+            ypositions[ypositions.Count - 1] = 0;
+            ypositions[ypositions.Count - 2] = 0;
+        }
+        else
+        {*/
+            ypositions[ypositions.Count - 1] += height;
+            ypositions[ypositions.Count - 2] += height;
+        //}
     }
 
 
