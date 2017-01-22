@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 4437615c3e751844f98d32d8b462f6b8, type: 2}
+  mesh: {fileID: 100000, guid: bd7d08261984f0f47981e1d04ab665d1, type: 2}
   ColliderBase: {fileID: 1912199937905570, guid: 9e785b02677850a43bfb7113e6fa8c8e,
     type: 2}
   SampleSize: 60
@@ -61,6 +62,8 @@ MonoBehaviour:
   Speed: 10
   Frequency: 2
   TimeIncrement: 0.01
+  AmplitudeRandomNoise: 0.2
+  Choppiness: 2
 --- !u!114 &114439065450217258
 MonoBehaviour:
   m_ObjectHideFlags: 1
