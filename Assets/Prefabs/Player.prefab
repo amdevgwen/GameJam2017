@@ -235,6 +235,9 @@ MonoBehaviour:
   maxRunSpeed: 8
   jumpPower: 10
   isGrounded: 0
+  isRunning: 0
+  isJumping: 0
+  inWater: 0
 --- !u!212 &212979142807606592
 SpriteRenderer:
   m_ObjectHideFlags: 1
