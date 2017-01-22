@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlaySoundOnTimer : MonoBehaviour {
 
     AudioSource audioSource;
-    public AudioClip[] ShipCreakSounds;
+    public AudioList soundList;
     public float minSoundTimer;
     public float maxSoundTimer;
     float nextSoundTime;
@@ -22,7 +22,7 @@ public class PlaySoundOnTimer : MonoBehaviour {
 		if(Time.time >= nextSoundTime)
         {
             nextSoundTime = Time.time + Random.Range(minSoundTimer, maxSoundTimer);
-            SoundManager.Instance.PlayAudio(audioSource, ShipCreakSounds);
+            SoundManager.Instance.PlayAudio(audioSource, soundList.ShipCreakSounds);
         }
 	}
 }

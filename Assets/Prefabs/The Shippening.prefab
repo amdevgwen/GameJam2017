@@ -332,6 +332,7 @@ GameObject:
   - component: {fileID: 114951819632460402}
   - component: {fileID: 114399217115959086}
   - component: {fileID: 114942578606628926}
+  - component: {fileID: 82355253923970602}
   m_Layer: 9
   m_Name: The Shippening
   m_TagString: Boat
@@ -904,6 +905,86 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.1}
+--- !u!82 &82355253923970602
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825165613940172}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114103345578304712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -995,11 +1076,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0979840a0920ed849a7274bbd930f923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShipCreakSounds:
-  - {fileID: 8300000, guid: 4576f82c9940c5e49ad326b6f1a4da1a, type: 3}
-  - {fileID: 8300000, guid: f7ee25bb4a489c142beb372bd3b69d44, type: 3}
-  - {fileID: 8300000, guid: b6c8160f5a0a0e2449a7cf18cc478200, type: 3}
-  soundTimer: 2
+  soundList: {fileID: 11400000, guid: d946fc74c83467c4d91da68102366454, type: 2}
+  minSoundTimer: 4
+  maxSoundTimer: 8
 --- !u!114 &114951819632460402
 MonoBehaviour:
   m_ObjectHideFlags: 1
