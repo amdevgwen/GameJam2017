@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 4967050620692654}
   - component: {fileID: 114302530943312256}
   - component: {fileID: 114464395644153706}
+  - component: {fileID: 114202862641317066}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -133,6 +134,21 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114202862641317066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1206428312662010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 227461547, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  showGUI: 0
+  offsetX: 0
+  offsetY: 0
 --- !u!114 &114302530943312256
 MonoBehaviour:
   m_ObjectHideFlags: 1

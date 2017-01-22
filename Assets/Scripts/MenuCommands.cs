@@ -9,6 +9,7 @@ public class MenuCommands : MonoBehaviour
 	NetworkManager _netMan;
 	NetworkDiscovery _netDisc;
 	public InputField hostAddressField;
+	public GameObject runningMan;
 
 	public void Quit()
 	{
@@ -26,6 +27,8 @@ public class MenuCommands : MonoBehaviour
 
 			Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 			ipText.text = hostAddressField.text.Trim();
+
+			AttachRunner(hostAddressField.transform);
 		}
 	}
 
@@ -36,12 +39,24 @@ public class MenuCommands : MonoBehaviour
 
 	public void Host()
 	{
+		if (_netDisc.isClient)
+		{
+			_netDisc.StopBroadcast();
+			print(_netDisc.isClient + " " + _netDisc.isServer);
+		}
+
 		_netMan.networkPort = 7777;
 
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 		ipText.text = Network.player.ipAddress + " (Host)";
 
-		_netMan.StartHost();
+		_netDisc.StartAsServer();
+//		_netMan.StartHost();
+	}
+
+	public void AttachRunner(Transform adjacentButton)
+	{
+		runningMan.transform.position = adjacentButton.position + new Vector3(3.5f, 0, 0);
 	}
 
 	void Start()
@@ -50,5 +65,11 @@ public class MenuCommands : MonoBehaviour
 		_netDisc = FindObjectOfType<NetworkDiscovery>();
 
 		print("Local discovery initialized? : " + _netDisc.Initialize().ToString());
+
+		_netMan.maxConnections = 16;
+
+		#if UNITY_EDITOR
+		_netDisc.runInEditMode = true;
+		#endif
 	}
 }
