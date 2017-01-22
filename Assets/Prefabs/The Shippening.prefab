@@ -297,6 +297,8 @@ GameObject:
   - component: {fileID: 50755293625324692}
   - component: {fileID: 114712436833349114}
   - component: {fileID: 60444619719791660}
+  - component: {fileID: 114951819632460402}
+  - component: {fileID: 114399217115959086}
   m_Layer: 9
   m_Name: The Shippening
   m_TagString: Untagged
@@ -782,6 +784,26 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.1}
+--- !u!114 &114399217115959086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825165613940172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.2
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114712436833349114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -809,6 +831,38 @@ MonoBehaviour:
   - {fileID: 4503981715042082}
   - {fileID: 4685378966283698}
   - {fileID: 4140000077192302}
+--- !u!114 &114951819632460402
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825165613940172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 59
+    i1: 75
+    i2: 78
+    i3: 199
+    i4: 194
+    i5: 118
+    i6: 141
+    i7: 228
+    i8: 11
+    i9: 99
+    i10: 92
+    i11: 17
+    i12: 10
+    i13: 66
+    i14: 54
+    i15: 149
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212912675765111804
 SpriteRenderer:
   m_ObjectHideFlags: 1
