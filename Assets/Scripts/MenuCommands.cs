@@ -31,7 +31,7 @@ public class MenuCommands : MonoBehaviour
 
 	public void JoinLocal()
 	{
-		_netDisc.StartAsClient();
+		print("Listening as client? : " + _netDisc.StartAsClient().ToString());
 	}
 
 	public void Host()
@@ -41,7 +41,6 @@ public class MenuCommands : MonoBehaviour
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 		ipText.text = Network.player.ipAddress + " (Host)";
 
-		_netDisc.StartAsServer();
 		_netMan.StartHost();
 	}
 
@@ -50,6 +49,6 @@ public class MenuCommands : MonoBehaviour
 		_netMan = FindObjectOfType<NetworkManager>();
 		_netDisc = FindObjectOfType<NetworkDiscovery>();
 
-		_netDisc.Initialize();
+		print("Local discovery initialized? : " + _netDisc.Initialize().ToString());
 	}
 }
