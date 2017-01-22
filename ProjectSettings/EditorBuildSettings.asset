@@ -10,4 +10,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/AndyStuff/WaveTesting/assets/scene.unity
   - enabled: 1
+    path: Assets/_Scenes/ActualMenu.unity
+  - enabled: 1
     path: Assets/_Scenes/_TheGame (By Secret Echoes of Love).unity
