@@ -56,7 +56,7 @@ MonoBehaviour:
   mesh: {fileID: 100000, guid: bd7d08261984f0f47981e1d04ab665d1, type: 2}
   ColliderBase: {fileID: 1912199937905570, guid: 9e785b02677850a43bfb7113e6fa8c8e,
     type: 2}
-  SampleSize: 60
+  SampleSize: 120
   WaveDistance: 50
   Amplitude: 1.5
   Speed: 10
@@ -65,7 +65,8 @@ MonoBehaviour:
   AmplitudeRandomNoise: 0.2
   Choppiness: 2
   SplashPrefab: {fileID: 100000, guid: 47bfa965e40c98948a14a77841013404, type: 2}
-  SplashParticleSystem: {fileID: 0}
+  SplashParticleSystem: {fileID: 19800000, guid: 47bfa965e40c98948a14a77841013404,
+    type: 2}
 --- !u!114 &114899792289729592
 MonoBehaviour:
   m_ObjectHideFlags: 1
