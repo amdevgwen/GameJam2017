@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAudio : MonoBehaviour
 {
+    public bool jusforshow;
     //public AudioSource audioSource;
     public AudioList sounds;
 
@@ -38,11 +39,14 @@ public class PlayerAudio : MonoBehaviour
             SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Wave);
 	}
 
-	public void PlayFootsteps()
-	{
-        if (AudioRef.instance != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Footsteps);
-	}
+    public void PlayFootsteps()
+    {
+        if (!jusforshow)
+        {
+            if (AudioRef.instance != null)
+                SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Footsteps);
+        }
+    }
 
 	public void PlayDrowningSound()
 	{
