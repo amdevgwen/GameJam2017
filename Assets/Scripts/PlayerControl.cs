@@ -128,7 +128,7 @@ public class PlayerControl : NetworkBehaviour
 		_anim.SetBool("On Ground", isGrounded);
 		_anim.SetBool("Running", isRunning);
 		_anim.SetBool("In Water", inWater);
-		_anim.SetBool("Wave", isWaving);
+		_anim.SetBool("Waving", isWaving);
 		if (isJumping)
 			_anim.SetTrigger("Jump");
 
