@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 1848063203}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &112512958
@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 329967069}
   - component: {fileID: 329967072}
   - component: {fileID: 329967073}
+  - component: {fileID: 329967074}
   m_Layer: 5
   m_Name: Host Button
   m_TagString: Untagged
@@ -353,9 +354,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.72156864, g: 0.882353, b: 0.8000001, a: 1}
+    m_HighlightedColor: {r: 0.6431373, g: 0.909804, b: 0.37254903, a: 1}
+    m_PressedColor: {r: 0.25882354, g: 0.63529414, b: 0.44705886, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72156864, g: 0.882353, b: 0.8000001, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -463,6 +464,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &329967074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 329967067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08331afd8b1cc0e4d93e95e4fea72863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectOnPointerEnter: 1
 --- !u!1 &471467079
 GameObject:
   m_ObjectHideFlags: 0
@@ -9163,6 +9176,7 @@ GameObject:
   - component: {fileID: 913529371}
   - component: {fileID: 913529374}
   - component: {fileID: 913529375}
+  - component: {fileID: 913529376}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -9208,9 +9222,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 1, g: 0.86274517, b: 0.8196079, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.54901963, b: 0.40784317, a: 1}
+    m_PressedColor: {r: 0.4901961, g: 0.121568635, b: 0.003921569, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -9242,7 +9256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.86274517, b: 0.8196079, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9307,6 +9321,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &913529376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 913529369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08331afd8b1cc0e4d93e95e4fea72863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectOnPointerEnter: 1
 --- !u!1 &916976969
 GameObject:
   m_ObjectHideFlags: 0
@@ -12679,6 +12705,7 @@ GameObject:
   - component: {fileID: 1744942985}
   - component: {fileID: 1744942984}
   - component: {fileID: 1744942987}
+  - component: {fileID: 1744942988}
   m_Layer: 5
   m_Name: Host Address Field
   m_TagString: Untagged
@@ -12725,9 +12752,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.8745099, g: 0.9607844, b: 0.78823537, a: 1}
+    m_HighlightedColor: {r: 0.70980394, g: 0.8000001, b: 0.854902, a: 1}
+    m_PressedColor: {r: 0.6431373, g: 0.909804, b: 0.37254903, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -12754,7 +12781,18 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1848063205}
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.InputField+SubmitEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_OnValueChanged:
@@ -12781,7 +12819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8745099, g: 0.9607844, b: 0.78823537, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -12816,6 +12854,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!114 &1744942988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1744942982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08331afd8b1cc0e4d93e95e4fea72863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectOnPointerEnter: 0
 --- !u!1 &1798930723
 GameObject:
   m_ObjectHideFlags: 0
@@ -12903,6 +12953,7 @@ GameObject:
   - component: {fileID: 1848063205}
   - component: {fileID: 1848063208}
   - component: {fileID: 1848063209}
+  - component: {fileID: 1848063210}
   m_Layer: 5
   m_Name: Join Button
   m_TagString: Untagged
@@ -12948,9 +12999,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.72156864, g: 0.882353, b: 0.8000001, a: 1}
+    m_HighlightedColor: {r: 0.6431373, g: 0.909804, b: 0.37254903, a: 1}
+    m_PressedColor: {r: 0.25882354, g: 0.63529414, b: 0.44705886, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -12993,7 +13044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72156864, g: 0.882353, b: 0.8000001, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13058,6 +13109,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &1848063210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848063203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08331afd8b1cc0e4d93e95e4fea72863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectOnPointerEnter: 1
 --- !u!1 &1884708896
 GameObject:
   m_ObjectHideFlags: 0
