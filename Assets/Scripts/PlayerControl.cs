@@ -5,166 +5,164 @@ using UnityEngine.Networking;
 
 public class PlayerControl : NetworkBehaviour
 {
-    public float runPower;
-    public float maxRunSpeed;
-    public float jumpPower;
+	public float runPower;
+	public float maxRunSpeed;
+	public float jumpPower;
 
-    private Rigidbody2D _rigid;
-    private Animator _anim;
+	private Rigidbody2D _rigid;
+	private Animator _anim;
 
-    [SyncVar]
-    public bool isGrounded;
-    [SyncVar]
-    public bool isRunning;
-    [SyncVar]
-    public bool isJumping;
-    [SyncVar]
-    public bool inWater;
+	[SyncVar]
+	public bool isGrounded;
+	[SyncVar]
+	public bool isRunning;
+	[SyncVar]
+	public bool isJumping;
+	[SyncVar]
+	public bool inWater;
+	[SyncVar]
+	public bool isWaving;
 
-    void Awake()
-    {
-        _anim = GetComponent<Animator>();
-        _rigid = GetComponent<Rigidbody2D>();
-    }
+	void Awake()
+	{
+		_anim = GetComponent<Animator>();
+		_rigid = GetComponent<Rigidbody2D>();
+	}
 
-    public override void OnStartLocalPlayer()
-    {
-        GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
-    }
+	public override void OnStartLocalPlayer()
+	{
+		GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
+	}
 
-    public override void OnStartClient()
-    {
-        Debug.Log("Calling On Start Client");
-        base.OnStartClient();
-    }
+	public override void OnStartClient()
+	{
+		Debug.Log("Calling On Start Client");
+		base.OnStartClient();
+	}
 
-    // the Update loop contains a very simple example of moving the character around and controlling the animation
-    void Update()
-    {
-        //Take Player movement
-        if (isLocalPlayer)
-        {
-            //prevent action
-            //if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
-            //{
-            //    if (Input.GetKeyDown(KeyCode.RightArrow))
-            //        Debug.Log("Can't Move - Player is Dead");
-            //    return;
-            //}
-            //Ground anim
-            //_anim.SetBool("On Ground", isGrounded);
+	// the Update loop contains a very simple example of moving the character around and controlling the animation
+	void Update()
+	{
+		//Take Player movement
+		if (isLocalPlayer)
+		{
+			//prevent action
+			//if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
+			//{
+			//    if (Input.GetKeyDown(KeyCode.RightArrow))
+			//        Debug.Log("Can't Move - Player is Dead");
+			//    return;
+			//}
+			//Ground anim
+			//_anim.SetBool("On Ground", isGrounded);
 
-            float direction = 0;
+			float direction = 0;
 
-            //Movement
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                //Right facing
-                if (transform.localScale.x > 0f)
-                    transform.localScale = new Vector3(-1, 1, 1);
+			//Movement
+			if ((direction = Input.GetAxis("Horizontal")) != 0)
+			{
+				//Right facing
+				if (transform.localScale.x * direction < 0)
+					transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
 
-                //Moving
-                isRunning = true;//_anim.SetBool("Running", true);
+				//Moving
+				isRunning = true;//_anim.SetBool("Running", true);
+			}
+			else
+			{
+				//Not moving
+				isRunning = false; // _anim.SetBool("Running", false);
+			}
 
-                //Dir
-                direction = 1;
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                //Left facing
-                if (transform.localScale.x < 0f)
-                    transform.localScale = new Vector3(1, 1, 1);
+			//Dampen air movement
+			if (!isGrounded)
+				direction /= 2;
 
-                //Moving
-                isRunning = true;// _anim.SetBool("Running", true);
+			//Movement
+			_rigid.AddForce(new Vector2(runPower * direction, 0));
 
-                //Dir
-                direction = -1;
-            }
-            else
-            {
-                //Not moving
-                isRunning = false; // _anim.SetBool("Running", false);
-            }
+			//Clamp horizontal velocity
+			_rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(maxRunSpeed, _rigid.velocity.y) : _rigid.velocity;
+			_rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-maxRunSpeed, _rigid.velocity.y) : _rigid.velocity;
 
-            //Dampen air movement
-            if (!isGrounded)
-                direction /= 2;
+			//Vertical
+			float vertical = Input.GetAxis("Vertical");
 
-            //Movement
-            _rigid.AddForce(new Vector2(runPower * direction, 0));
+			if (Input.GetAxis("Jump") > 0)
+				vertical += 1;
 
-            //Clamp horizontal velocity
-            _rigid.velocity = _rigid.velocity.x > maxRunSpeed ? new Vector2(10, _rigid.velocity.y) : _rigid.velocity;
-            _rigid.velocity = _rigid.velocity.x < -maxRunSpeed ? new Vector2(-10, _rigid.velocity.y) : _rigid.velocity;
+			//Waving
+			isWaving = vertical < 0;
 
-            //Jumping
-            if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                _rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+			//Jumping
+			if (isGrounded && vertical > 0)
+			{
+				_rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
 
-                isJumping = true;// _anim.SetTrigger("Jump");
-            }
+				isJumping = true;// _anim.SetTrigger("Jump");
+			}
 
-            CmdSyncState(isGrounded, isRunning, isJumping, inWater);
-        }
-        //Everybody else now
-        RunState(); //Run state regardless
+			CmdSyncState(isGrounded, isRunning, isJumping, inWater, isWaving);
+		}
+		//Everybody else now
+		RunState(); //Run state regardless
 
-    }
+	}
 
-    [Command]
-    private void CmdSyncState(bool grounded, bool running, bool jumping, bool water)
-    {
-        if (isServer)
-        {
-            isGrounded = grounded;
-            isRunning = running;
-            isJumping = jumping;
-            inWater = water;
-        }
-    }
+	[Command]
+	private void CmdSyncState(bool grounded, bool running, bool jumping, bool water, bool wave)
+	{
+		if (isServer)
+		{
+			isGrounded = grounded;
+			isRunning = running;
+			isJumping = jumping;
+			inWater = water;
+			isWaving = wave;
+		}
+	}
 
 
-    private void RunState()
-    {
-        _anim.SetBool("On Ground", isGrounded);
-        _anim.SetBool("Running", isRunning);
-        _anim.SetBool("In Water", inWater);
-        if (isJumping)
-            _anim.SetTrigger("Jump");
+	private void RunState()
+	{
+		_anim.SetBool("On Ground", isGrounded);
+		_anim.SetBool("Running", isRunning);
+		_anim.SetBool("In Water", inWater);
+		_anim.SetBool("Wave", isWaving);
+		if (isJumping)
+			_anim.SetTrigger("Jump");
 
-    }
+	}
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (isLocalPlayer)
-        {
-            if (other.tag == "Water")
-            {
-                _rigid.gravityScale = 0.1f;
-                if (Mathf.Abs(_rigid.velocity.y) > 1)
-                    _rigid.velocity /= 10;
+	void OnTriggerStay2D(Collider2D other)
+	{
+		if (isLocalPlayer)
+		{
+			if (other.tag == "Water")
+			{
+				_rigid.gravityScale = 0.1f;
+				if (Mathf.Abs(_rigid.velocity.y) > 1)
+					_rigid.velocity /= 10;
 
-                inWater = true;//_anim.SetBool("In Water", true);
-            }
-            CmdSyncState(isGrounded, isRunning, isJumping, inWater);
-        }
-    }
+				inWater = true;//_anim.SetBool("In Water", true);
+			}
+			CmdSyncState(isGrounded, isRunning, isJumping, inWater, isWaving);
+		}
+	}
 
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (isLocalPlayer)
-        {
-            if (other.tag == "Water")
-            {
-                _rigid.gravityScale = 2f;
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (isLocalPlayer)
+		{
+			if (other.tag == "Water")
+			{
+				_rigid.gravityScale = 2f;
 
-                inWater = false;//_anim.SetBool("In Water", false);
-            }
-            CmdSyncState(isGrounded, isRunning, isJumping, inWater);
-        }
-    }
+				inWater = false;//_anim.SetBool("In Water", false);
+			}
+			CmdSyncState(isGrounded, isRunning, isJumping, inWater, isWaving);
+		}
+	}
 
 
 }
