@@ -27,7 +27,6 @@ GameObject:
   - component: {fileID: 114992607760102976}
   - component: {fileID: 95789796897051844}
   - component: {fileID: 114495268711288676}
-  - component: {fileID: 82320486595980196}
   - component: {fileID: 114619704263998060}
   m_Layer: 8
   m_Name: Player
@@ -128,86 +127,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.4}
---- !u!82 &82320486595980196
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1284156920494448}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!95 &95789796897051844
 Animator:
   serializedVersion: 3
@@ -305,7 +224,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a619a104e0969a4b824b6f38edb8e27, type: 3}
   drowningSound:
   - {fileID: 8300000, guid: eeb7d349481cdf4498104c65f3e8b610, type: 3}
-  Wave: {fileID: 8300000, guid: 19528c729d7fe1e49abf81c74ba98512, type: 3}
+  Wave: {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
   SpawnSound: {fileID: 8300000, guid: d00de748ca9e4a547b96321cafd54c57, type: 3}
   dieSound: {fileID: 8300000, guid: f1f4f69c81bf5e748b9abd18b0ab61a9, type: 3}
 --- !u!114 &114734309338667330

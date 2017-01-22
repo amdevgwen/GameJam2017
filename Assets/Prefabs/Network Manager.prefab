@@ -173,7 +173,7 @@ MonoBehaviour:
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
-  m_OfflineScene: 
+  m_OfflineScene: ActualMenu
   m_OnlineScene: _TheGame (By Secret Echoes of Love)
   m_SpawnPrefabs: []
   m_CustomConfig: 0
