@@ -29,13 +29,15 @@ public class WaveEngine : NetworkBehaviour
     [SyncVar]
     private float CurrentTime = 0.0f;
     [SyncVar]
-    public float Amplitude = 1.0f;
+    public float Amplitude = Mathf.PI;
     [SyncVar]
     public float Speed = 10.0f;
     [SyncVar]
     public float Frequency = 4.0f;
     [SyncVar]
     public float TimeIncrement = 0.01f;
+    [SyncVar]
+    public float AmplitudeRandomNoise = 0.2f;
 
     List<WaterCollider> colliders = new List<WaterCollider>();
 
@@ -108,7 +110,7 @@ public class WaveEngine : NetworkBehaviour
 
         foreach(var body in colliders)
         {
-            Vector2 newPos = new Vector2(body.transform.position.x, FindY(Amplitude, Frequency, Speed, deltaSample * index, CurrentTime));
+            Vector2 newPos = new Vector2(body.transform.position.x, FindY(  Amplitude, Frequency, Speed, deltaSample * index, CurrentTime));
             WaterLine.SetPosition(index, newPos);
 
             body.transform.position = newPos;
@@ -118,7 +120,7 @@ public class WaveEngine : NetworkBehaviour
 
     private float FindY(float amp, float freq, float speed, float pos, float time)
     {
-        return amp * Mathf.Sin(2 * Mathf.PI * freq * ((pos / speed) + time));
+        return Mathf.PerlinNoise(Time.time, 0f) * ((amp * amp) * (Random.Range(1f, 1f + AmplitudeRandomNoise) + 0.5f)) * Mathf.Sin(2 * Mathf.PI * freq * ((pos / speed) + time));
     }
 
     /*
