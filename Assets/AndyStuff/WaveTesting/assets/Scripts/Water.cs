@@ -211,6 +211,13 @@ public class Water : MonoBehaviour
     //Called regularly by Unity
     void FixedUpdate()
     {
+        /* // For testing porpoises.
+        if (Input.GetMouseButtonDown(0))
+        {
+            MoveForward(10);
+        }
+        */
+
         //Here we use the Euler method to handle all the physics of our springs:
         for (int i = 0; i < xpositions.Count ; i++)
         {
