@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MenuCommands : MonoBehaviour
 {
-	NetworkManager _netMan;
 	public InputField hostAddressField;
 	public GameObject runningMan;
 
@@ -17,13 +16,13 @@ public class MenuCommands : MonoBehaviour
 
 	public void SetIPAndJoin()
 	{
-		_netMan.networkPort = 7777;
+		NetworkManager.singleton.networkPort = 7777;
 		if (hostAddressField != null && hostAddressField.text != null && hostAddressField.text.Trim() != "")
 		{
-			_netMan.networkAddress = hostAddressField.text.Trim();
+			NetworkManager.singleton.networkAddress = hostAddressField.text.Trim();
 		}
 
-		_netMan.StartClient();
+		NetworkManager.singleton.StartClient();
 
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 		ipText.text = hostAddressField.text.Trim();
@@ -34,15 +33,15 @@ public class MenuCommands : MonoBehaviour
 
 	public void Host()
 	{
-		if (_netMan.client != null)
-			_netMan.StopClient();
+		if (NetworkManager.singleton.IsClientConnected())
+			NetworkManager.singleton.StopClient();
 
-		_netMan.networkPort = 7777;
+		NetworkManager.singleton.networkPort = 7777;
 
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 		ipText.text = Network.player.ipAddress + " (Host)";
 
-		_netMan.StartHost();		//Is hosting and live
+		NetworkManager.singleton.StartHost();		//Is hosting and live
 	}
 
 	public void AttachRunner(Transform adjacentButton)
@@ -52,8 +51,8 @@ public class MenuCommands : MonoBehaviour
 
 	void Start()
 	{
-		_netMan = FindObjectOfType<NetworkManager>();
+		NetworkManager.singleton = FindObjectOfType<NetworkManager>();
 
-		_netMan.maxConnections = 16;
+		NetworkManager.singleton.maxConnections = 16;
 	}
 }
