@@ -5,18 +5,18 @@ using UnityEngine.Networking;
 
 public class CustomNetworkManager : NetworkManager
 {
-
-	public override void OnClientDisconnect(NetworkConnection conn)
+	public override void OnStopClient()
 	{
-		base.OnClientDisconnect(conn);
-		print("Client Disconnect");
+		base.OnStopClient();
+
+		print("Stopped!");
 
 		var ipField = GameObject.Find("Host Address Field");
 		if (ipField != null)
 		{
-			ipField.GetComponent<UnityEngine.UI.InputField>().text = conn.address;
-			print("IP saved");
+			ipField.GetComponent<UnityEngine.UI.InputField>().text = networkAddress;
+
+			print(networkAddress);
 		}
 	}
-
 }
