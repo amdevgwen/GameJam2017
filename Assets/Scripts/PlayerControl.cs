@@ -100,6 +100,8 @@ public class PlayerControl : NetworkBehaviour
 				_rigid.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
 
 				isJumping = true;// _anim.SetTrigger("Jump");
+
+				isGrounded = false;
 			}
 
 			CmdSyncState(isGrounded, isRunning, isJumping, inWater, isWaving);
