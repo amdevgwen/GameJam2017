@@ -47,3 +47,6 @@ TagManager:
   - name: BUBS
     uniqueID: 4193794263
     locked: 0
+  - name: Bottle Background
+    uniqueID: 1100948095
+    locked: 0
