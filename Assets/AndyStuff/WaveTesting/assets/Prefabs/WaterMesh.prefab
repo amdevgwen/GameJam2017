@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 2300000}
   - component: {fileID: 3300000}
+  - component: {fileID: 114120000043397800}
   m_Layer: 4
   m_Name: WaterMesh
   m_TagString: Water
@@ -79,3 +80,35 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
+--- !u!114 &114120000043397800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 189
+    i1: 125
+    i2: 8
+    i3: 38
+    i4: 25
+    i5: 132
+    i6: 240
+    i7: 244
+    i8: 121
+    i9: 129
+    i10: 225
+    i11: 208
+    i12: 74
+    i13: 182
+    i14: 101
+    i15: 209
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
