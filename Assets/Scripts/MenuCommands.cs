@@ -8,6 +8,8 @@ public class MenuCommands : MonoBehaviour
 {
 	public InputField hostAddressField;
 	public GameObject runningMan;
+	Text _ipText;
+
 
 	public void Quit()
 	{
@@ -24,9 +26,8 @@ public class MenuCommands : MonoBehaviour
 
 		NetworkManager.singleton.StartClient();
 
-		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
-		ipText.text = hostAddressField.text.Trim();
-		ipText.text = ipText.text == "" ? "Local" : ipText.text;
+		_ipText.text = hostAddressField.text.Trim();
+		_ipText.text = _ipText.text == "" ? "Local" : _ipText.text;
 
 		AttachRunner(hostAddressField.transform);
 	}
@@ -38,8 +39,7 @@ public class MenuCommands : MonoBehaviour
 
 		NetworkManager.singleton.networkPort = 7777;
 
-		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
-		ipText.text = Network.player.ipAddress + " (Host)";
+		_ipText.text = Network.player.ipAddress + " (Host)";
 
 		NetworkManager.singleton.StartHost();		//Is hosting and live
 	}
@@ -54,5 +54,13 @@ public class MenuCommands : MonoBehaviour
 		NetworkManager.singleton = FindObjectOfType<NetworkManager>();
 
 		NetworkManager.singleton.maxConnections = 16;
+
+		_ipText = GameObject.Find("Host IP").GetComponent<Text>();
+
+		if (_ipText != null && _ipText.text.Trim() != "" && !_ipText.text.Contains("Local") && !_ipText.text.Contains("Host"))
+		{
+			hostAddressField.text = _ipText.text;
+		}
+			
 	}
 }
