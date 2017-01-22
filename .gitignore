@@ -28,3 +28,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/Resources/Prefabs.meta
+Assets/Resources/Sounds.meta
