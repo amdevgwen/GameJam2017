@@ -112,8 +112,21 @@ public class WaveEngine : NetworkBehaviour
 
         foreach(var body in colliders)
         {
+            Vector3 parentPosition;
+            if (transform != null)
+            {
+                parentPosition = transform.position;
+            }
+            else
+            {
+                parentPosition = Vector3.zero;
+            }
+
             Vector2 newPos = new Vector2(body.transform.position.x, FindY(  Amplitude, Frequency, Speed, deltaSample * index, CurrentTime));
+            newPos = new Vector2(newPos.x + parentPosition.x, newPos.y + parentPosition.y);
+
             WaterLine.SetPosition(index, newPos);
+
 
             body.transform.position = newPos;
             index++;

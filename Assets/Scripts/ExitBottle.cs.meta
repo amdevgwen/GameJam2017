@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 4efa20b2e6202404e866cbded95356a9
-timeCreated: 1485070004
+timeCreated: 1485111792
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bottle: {fileID: 1824937236897254, guid: 420363a8d82f3f7408d28da3d1d818be, type: 2}
+  - water: {fileID: 1120373431105988, guid: be89c5e06f8c550449f700df328ce6cb, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

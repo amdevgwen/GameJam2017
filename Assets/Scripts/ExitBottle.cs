@@ -5,8 +5,6 @@ using UnityEngine;
 public class ExitBottle : MonoBehaviour
 {
 
-	public GameObject bottle;
-	public GameObject water;
 
 	// Use this for initialization
 	void Start()
@@ -17,12 +15,16 @@ public class ExitBottle : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		
-	}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Exit();
+        }
+
+    }
 
 	void Exit()
 	{
-		/* TODO: 
+        /* TODO: 
          * Delete existing bottle
          * Delete existing water
          * Play animation
@@ -30,17 +32,20 @@ public class ExitBottle : MonoBehaviour
          * Other stuff maybe?
          */
 
-		// Delete existing bottle
-		// TODO: Find out what the bottle object is actually called.
-		Destroy(GameObject.Find("Bottle"));
+        // Find the boat object.
+        GameObject boat = GameObject.Find("The Shippening");
 
-		// Delete existing water
-		// TODO: Find out what the water object is actually called.
-		Destroy(GameObject.Find("water object"));
+        // Set the new position of the bottle and water based on the current position of the boat.
+        Vector3 bottlePosition = new Vector3(boat.transform.position.x + 40, boat.transform.position.y - 20, boat.transform.position.z);
+        Vector3 waterPosition = new Vector3(boat.transform.position.x, boat.transform.position.y - 20, boat.transform.position.z);
 
-		// Find the boat object.
-		GameObject boat = GameObject.Find("The Shippening");
+        // Move Bottle
+        GameObject.Find("Bottle").transform.position = bottlePosition;
 
+		// Move water
+		GameObject.Find("WaterManager").transform.position = waterPosition;
+
+		
 		// Disable boat rigidbodies.
 		boat.GetComponent<Rigidbody2D>().simulated = false;
 
@@ -50,11 +55,6 @@ public class ExitBottle : MonoBehaviour
 		// Renable boat rigidbodies.
 		boat.GetComponent<Rigidbody2D>().simulated = true;
 
-		// Create new water.
-		Instantiate(water);
-
-		// Create new bottle.
-		Instantiate(bottle);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider)
