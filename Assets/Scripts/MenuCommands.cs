@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MenuCommands : MonoBehaviour
 {
 	NetworkManager _netMan;
-	NetworkDiscovery _netDisc;
 	public InputField hostAddressField;
 	public GameObject runningMan;
 
@@ -22,36 +21,25 @@ public class MenuCommands : MonoBehaviour
 		if (hostAddressField != null && hostAddressField.text != null && hostAddressField.text.Trim() != "")
 		{
 			_netMan.networkAddress = hostAddressField.text.Trim();
-
-			_netMan.StartClient();
-
-			Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
-			ipText.text = hostAddressField.text.Trim();
-
-			AttachRunner(hostAddressField.transform);
 		}
-	}
 
-	public void JoinLocal()
-	{
-		print("Listening as client? : " + _netDisc.StartAsClient().ToString());
+		_netMan.StartClient();
+
+		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
+		ipText.text = hostAddressField.text.Trim();
+		ipText.text = ipText.text == "" ? "Local" : ipText.text;
+
+		AttachRunner(hostAddressField.transform);
 	}
 
 	public void Host()
 	{
-		if (_netDisc.isClient)
-		{
-			_netDisc.StopBroadcast();
-			print(_netDisc.isClient + " " + _netDisc.isServer);
-		}
-
 		_netMan.networkPort = 7777;
 
 		Text ipText = GameObject.Find("Host IP").GetComponent<Text>();
 		ipText.text = Network.player.ipAddress + " (Host)";
 
-		_netDisc.StartAsServer();
-//		_netMan.StartHost();
+		_netMan.StartHost();		//Is hosting and live
 	}
 
 	public void AttachRunner(Transform adjacentButton)
@@ -62,14 +50,7 @@ public class MenuCommands : MonoBehaviour
 	void Start()
 	{
 		_netMan = FindObjectOfType<NetworkManager>();
-		_netDisc = FindObjectOfType<NetworkDiscovery>();
-
-		print("Local discovery initialized? : " + _netDisc.Initialize().ToString());
 
 		_netMan.maxConnections = 16;
-
-		#if UNITY_EDITOR
-		_netDisc.runInEditMode = true;
-		#endif
 	}
 }
