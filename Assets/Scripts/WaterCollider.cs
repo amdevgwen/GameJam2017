@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaterCollider : MonoBehaviour
 {
-
+    public float PushStrength = 700;
     private float initX;
     // Use this for initialization
     void Start()
@@ -27,7 +27,7 @@ public class WaterCollider : MonoBehaviour
         {
             Debug.Log("is boat");
             collision.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(
-                new Vector2(0, 700), transform.position, ForceMode2D.Force);
+                new Vector2(0, PushStrength), transform.position, ForceMode2D.Force);
         }
     }
 
