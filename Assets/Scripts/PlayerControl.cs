@@ -11,6 +11,7 @@ public class PlayerControl : NetworkBehaviour
 
 	private Rigidbody2D _rigid;
 	private Animator _anim;
+	private SpriteRenderer _sprite;
 
 	[SyncVar]
 	public bool isGrounded;
@@ -27,6 +28,7 @@ public class PlayerControl : NetworkBehaviour
 	{
 		_anim = GetComponent<Animator>();
 		_rigid = GetComponent<Rigidbody2D>();
+		_sprite = GetComponent<SpriteRenderer>();
 	}
 
 	public override void OnStartLocalPlayer()
@@ -46,22 +48,21 @@ public class PlayerControl : NetworkBehaviour
 		//Take Player movement
 		if (isLocalPlayer)
 		{
-            //prevent action
-            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
-            {
-                return;
-            }
-            //Ground anim
-            //_anim.SetBool("On Ground", isGrounded);
+			//prevent action
+			if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Crew Dead"))
+			{
+				return;
+			}
+			//Ground anim
+			//_anim.SetBool("On Ground", isGrounded);
 
-            float direction = 0;
+			float direction = 0;
 
 			//Movement
 			if ((direction = Input.GetAxis("Horizontal")) != 0)
 			{
-				//Right facing
-				if (transform.localScale.x * direction < 0)
-					transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+				//Facing
+				_sprite.flipX = direction > 0;
 
 				//Moving
 				isRunning = true;//_anim.SetBool("Running", true);
@@ -100,6 +101,10 @@ public class PlayerControl : NetworkBehaviour
 				isJumping = true;// _anim.SetTrigger("Jump");
 
 				isGrounded = false;
+			}
+			else
+			{
+				isJumping = false;
 			}
 
 			CmdSyncState(isGrounded, isRunning, isJumping, inWater, isWaving);
