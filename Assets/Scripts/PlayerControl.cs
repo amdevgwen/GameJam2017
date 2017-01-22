@@ -34,12 +34,6 @@ public class PlayerControl : NetworkBehaviour
 		GetComponent<SpriteRenderer>().color = new Color(0f, 1f, 0f);
 	}
 
-	public override void OnStartClient()
-	{
-		Debug.Log("Calling On Start Client");
-		base.OnStartClient();
-	}
-
 	// the Update loop contains a very simple example of moving the character around and controlling the animation
 	void Update()
 	{
