@@ -80,7 +80,8 @@ public class WaveEngine : NetworkBehaviour
         {
 
             Vector3 colliderPos = new Vector3(xLocMin + deltaSampleWidth * i, yLoc, 0);
-            GameObject collider = GameObject.Instantiate<GameObject>(ColliderBase, transform);
+            GameObject collider = GameObject.Instantiate<GameObject>(ColliderBase, colliderPos, Quaternion.identity);
+            collider.transform.parent = transform;
             WaterCollider watrcld = collider.GetComponent<WaterCollider>();
             watrcld.particleSystem = SplashParticleSystem;
             colliders.Add(watrcld);
