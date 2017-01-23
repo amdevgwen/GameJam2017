@@ -8,7 +8,7 @@ public class AudioList : ScriptableObject {
     //Player Sounds
     public AudioClip Jump;
     public AudioClip drowningSound;
-    public AudioClip Wave;
+    public AudioClip[] Wave;
     public AudioClip SpawnSound;
     public AudioClip dieSound;
     public AudioClip[] Footsteps;
