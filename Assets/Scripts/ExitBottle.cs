@@ -42,9 +42,11 @@ public class ExitBottle : MonoBehaviour
         Vector3 waterPosition = new Vector3(boat.transform.position.x, boat.transform.position.y - 20, boat.transform.position.z);
 
         // Move Bottle
-        GameObject.Find("Bottle").transform.position = bottlePosition;
+        GameObject.Find("BottleContainer").transform.position = bottlePosition;
 
 		// Move water
+        // ERROR!
+        // The water manager has a new name so this is no longer valid.
 		GameObject.Find("WaterManager").transform.position = waterPosition;
 
 		
