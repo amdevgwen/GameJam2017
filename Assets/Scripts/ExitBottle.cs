@@ -45,25 +45,26 @@ public class ExitBottle : MonoBehaviour
         GameObject.Find("BottleContainer").transform.position = bottlePosition;
 
 		// Move water
-        // ERROR!
-        // The water manager has a new name so this is no longer valid.
-		GameObject.Find("WaterManager").transform.position = waterPosition;
+		GameObject.Find("WaterManagerPerlinWaves").transform.position = waterPosition;
 
 		
 		// Disable boat rigidbodies.
-		boat.GetComponent<Rigidbody2D>().simulated = false;
+		//boat.GetComponent<Rigidbody2D>().simulated = false;
 
 		// Play Animation
 		// TODO: I don't actually know how to do this.
 
 		// Renable boat rigidbodies.
-		boat.GetComponent<Rigidbody2D>().simulated = true;
+		//boat.GetComponent<Rigidbody2D>().simulated = true;
 
 	}
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		Debug.Log("Moves ");
-		Exit();
+        if (collider.GetComponent<FloatingObject>())
+        {
+            Debug.Log("Moves ");
+		    Exit();
+        }
 	}
 }
