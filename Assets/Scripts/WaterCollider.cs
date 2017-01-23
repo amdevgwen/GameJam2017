@@ -23,12 +23,10 @@ public class WaterCollider : MonoBehaviour
 		transform.position = position;
 	}
 
-	private void OnTriggerStay2D(Collider2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Boat")
-		{
-            
+		{   
             collision.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(
 				new Vector2(0, PushStrength), transform.position, ForceMode2D.Force);
 

@@ -16,7 +16,7 @@ public class WaveEngine : NetworkBehaviour
     [SerializeField]
     private int SampleSize = 120; //number of sample in the wave
     [SerializeField]
-    private float WaveDistance = 50; //expand from center
+    private float WaveDistance; //expand from center
 
     private const float Z_DEPTH = -1.0f; //depth in 2d space
     private const float WAVE_DEPTH = -4f; //depth in water
