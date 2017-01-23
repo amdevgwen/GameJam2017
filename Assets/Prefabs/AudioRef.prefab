@@ -53,7 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Jump: {fileID: 8300000, guid: e742a994a6f30e6419567c0c9439ee9e, type: 3}
   drowningSound: {fileID: 8300000, guid: eeb7d349481cdf4498104c65f3e8b610, type: 3}
-  Wave: {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
+  Wave:
+  - {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
+  - {fileID: 8300000, guid: ed4aaf8960533804dbd24511920e12e2, type: 3}
+  - {fileID: 8300000, guid: 31d47a97fdd650d4b8b352e1f4ee846c, type: 3}
   SpawnSound: {fileID: 8300000, guid: d00de748ca9e4a547b96321cafd54c57, type: 3}
   dieSound: {fileID: 8300000, guid: f1f4f69c81bf5e748b9abd18b0ab61a9, type: 3}
   Footsteps:
