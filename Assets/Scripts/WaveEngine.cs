@@ -64,7 +64,7 @@ public class WaveEngine : NetworkBehaviour
     private void InitializeCollider()
     {
 
-        float xLocMin = -(WaveDistance / 2);
+        float xLocMin = -(WaveDistance / 2) + transform.position.x;
         float yLoc = transform.position.y;
         float deltaSampleWidth = WaveDistance / SampleSize;
 
@@ -165,10 +165,7 @@ public class WaveEngine : NetworkBehaviour
             float newY = FindY(Amplitude, Frequency, Speed, deltaSample * index, CurrentTime);
             Vector2 newPos = new Vector2(body.transform.position.x, newY);
             newPos = new Vector2(newPos.x + parentPosition.x, newPos.y + parentPosition.y);
-            newPos.x = newPos.x + transform.position.x;
-            newPos.y = newPos.y + transform.position.y;
             WaterLine.SetPosition(index, newPos);
-
             body.transform.position = newPos;
 
             yData[index] = newY;
