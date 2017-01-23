@@ -9649,7 +9649,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -10039,6 +10039,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114251761994518636, guid: 111901d499b43c3418c8dfe4861efad9,
+        type: 2}
+      propertyPath: Wave.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4180036045738534, guid: 111901d499b43c3418c8dfe4861efad9, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0.19476695
@@ -10071,6 +10076,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 114251761994518636, guid: 111901d499b43c3418c8dfe4861efad9,
+        type: 2}
+      propertyPath: Wave.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f9c790290e916e4eb7788efa72628e3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 111901d499b43c3418c8dfe4861efad9, type: 2}
   m_IsPrefabParent: 0

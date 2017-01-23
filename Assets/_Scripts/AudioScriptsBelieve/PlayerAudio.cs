@@ -36,7 +36,7 @@ public class PlayerAudio : MonoBehaviour
 	public void PlayWaveSound()
 	{
         if (sounds != null)
-            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Wave);
+            SoundManager.Instance.PlayAudio(AudioSourcePool.GetSource(this.transform), AudioRef.instance.Wave[Random.Range(0, AudioRef.instance.Wave.Length)]);
 	}
 
     public void PlayFootsteps()
